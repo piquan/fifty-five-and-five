@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2D75E2091CB49F4500704C3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2081CB49F4500704C3A /* main.m */; };
+		2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E20B1CB49F4500704C3A /* AppDelegate.m */; };
+		2D75E20F1CB49F4800704C3A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E20E1CB49F4800704C3A /* ViewController.m */; };
+		2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2101CB49F4900704C3A /* Main.storyboard */; };
+		2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2131CB49F4C00704C3A /* Assets.xcassets */; };
+		2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */; };
+		2D75E2221CB49F5600704C3A /* Fifty_Five_and_FiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */; };
+		2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2D75E21E1CB49F5400704C3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D75E1FC1CB49F2D00704C3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D75E2031CB49F3100704C3A;
+			remoteInfo = "Fifty-Five and Five";
+		};
+		2D75E2291CB49F5600704C3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D75E1FC1CB49F2D00704C3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D75E2031CB49F3100704C3A;
+			remoteInfo = "Fifty-Five and Five";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fifty-Five and Five.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D75E2081CB49F4500704C3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2D75E20A1CB49F4500704C3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2D75E20B1CB49F4500704C3A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2D75E20D1CB49F4600704C3A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2D75E20E1CB49F4800704C3A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2D75E2111CB49F4900704C3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2D75E2131CB49F4C00704C3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2D75E2161CB49F4C00704C3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2D75E2181CB49F4C00704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and FiveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_FiveTests.m; sourceTree = "<group>"; };
+		2D75E2231CB49F5600704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and FiveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_FiveUITests.m; sourceTree = "<group>"; };
+		2D75E22E1CB49F5700704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2D75E2011CB49F3100704C3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E21A1CB49F5400704C3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E2251CB49F5600704C3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2D75E1FB1CB49F2C00704C3A = {
+			isa = PBXGroup;
+			children = (
+				2D75E2061CB49F4400704C3A /* Fifty-Five and Five */,
+				2D75E2201CB49F5400704C3A /* Fifty-Five and FiveTests */,
+				2D75E22B1CB49F5600704C3A /* Fifty-Five and FiveUITests */,
+				2D75E2051CB49F3200704C3A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2D75E2051CB49F3200704C3A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */,
+				2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */,
+				2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D75E2061CB49F4400704C3A /* Fifty-Five and Five */ = {
+			isa = PBXGroup;
+			children = (
+				2D75E20A1CB49F4500704C3A /* AppDelegate.h */,
+				2D75E20B1CB49F4500704C3A /* AppDelegate.m */,
+				2D75E20D1CB49F4600704C3A /* ViewController.h */,
+				2D75E20E1CB49F4800704C3A /* ViewController.m */,
+				2D75E2101CB49F4900704C3A /* Main.storyboard */,
+				2D75E2131CB49F4C00704C3A /* Assets.xcassets */,
+				2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */,
+				2D75E2181CB49F4C00704C3A /* Info.plist */,
+				2D75E2071CB49F4400704C3A /* Supporting Files */,
+			);
+			path = "Fifty-Five and Five";
+			sourceTree = "<group>";
+		};
+		2D75E2071CB49F4400704C3A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2D75E2081CB49F4500704C3A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2D75E2201CB49F5400704C3A /* Fifty-Five and FiveTests */ = {
+			isa = PBXGroup;
+			children = (
+				2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */,
+				2D75E2231CB49F5600704C3A /* Info.plist */,
+			);
+			path = "Fifty-Five and FiveTests";
+			sourceTree = "<group>";
+		};
+		2D75E22B1CB49F5600704C3A /* Fifty-Five and FiveUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */,
+				2D75E22E1CB49F5700704C3A /* Info.plist */,
+			);
+			path = "Fifty-Five and FiveUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2D75E2031CB49F3100704C3A /* Fifty-Five and Five */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D75E2311CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and Five" */;
+			buildPhases = (
+				2D75E2001CB49F3100704C3A /* Sources */,
+				2D75E2011CB49F3100704C3A /* Frameworks */,
+				2D75E2021CB49F3100704C3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fifty-Five and Five";
+			productName = "Fifty-Five and Five";
+			productReference = 2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2D75E21C1CB49F5400704C3A /* Fifty-Five and FiveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D75E2341CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveTests" */;
+			buildPhases = (
+				2D75E2191CB49F5400704C3A /* Sources */,
+				2D75E21A1CB49F5400704C3A /* Frameworks */,
+				2D75E21B1CB49F5400704C3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D75E21F1CB49F5400704C3A /* PBXTargetDependency */,
+			);
+			name = "Fifty-Five and FiveTests";
+			productName = "Fifty-Five and FiveTests";
+			productReference = 2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2D75E2271CB49F5600704C3A /* Fifty-Five and FiveUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D75E2371CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveUITests" */;
+			buildPhases = (
+				2D75E2241CB49F5600704C3A /* Sources */,
+				2D75E2251CB49F5600704C3A /* Frameworks */,
+				2D75E2261CB49F5600704C3A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D75E22A1CB49F5600704C3A /* PBXTargetDependency */,
+			);
+			name = "Fifty-Five and FiveUITests";
+			productName = "Fifty-Five and FiveUITests";
+			productReference = 2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2D75E1FC1CB49F2D00704C3A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Joel Ray Holveck";
+				TargetAttributes = {
+					2D75E2031CB49F3100704C3A = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					2D75E21C1CB49F5400704C3A = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 2D75E2031CB49F3100704C3A;
+					};
+					2D75E2271CB49F5600704C3A = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 2D75E2031CB49F3100704C3A;
+					};
+				};
+			};
+			buildConfigurationList = 2D75E1FF1CB49F2D00704C3A /* Build configuration list for PBXProject "Fifty-Five and Five" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2D75E1FB1CB49F2C00704C3A;
+			productRefGroup = 2D75E2051CB49F3200704C3A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2D75E2031CB49F3100704C3A /* Fifty-Five and Five */,
+				2D75E21C1CB49F5400704C3A /* Fifty-Five and FiveTests */,
+				2D75E2271CB49F5600704C3A /* Fifty-Five and FiveUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2D75E2021CB49F3100704C3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */,
+				2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */,
+				2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E21B1CB49F5400704C3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E2261CB49F5600704C3A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2D75E2001CB49F3100704C3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D75E20F1CB49F4800704C3A /* ViewController.m in Sources */,
+				2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */,
+				2D75E2091CB49F4500704C3A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E2191CB49F5400704C3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D75E2221CB49F5600704C3A /* Fifty_Five_and_FiveTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2D75E2241CB49F5600704C3A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2D75E21F1CB49F5400704C3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D75E2031CB49F3100704C3A /* Fifty-Five and Five */;
+			targetProxy = 2D75E21E1CB49F5400704C3A /* PBXContainerItemProxy */;
+		};
+		2D75E22A1CB49F5600704C3A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D75E2031CB49F3100704C3A /* Fifty-Five and Five */;
+			targetProxy = 2D75E2291CB49F5600704C3A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2D75E2101CB49F4900704C3A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2D75E2111CB49F4900704C3A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2D75E2161CB49F4C00704C3A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2D75E22F1CB49F5700704C3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2D75E2301CB49F5700704C3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2D75E2321CB49F5700704C3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Fifty-Five and Five/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-Five";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2D75E2331CB49F5700704C3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Fifty-Five and Five/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-Five";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2D75E2351CB49F5700704C3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Fifty-Five and FiveTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fifty-Five and Five.app/Fifty-Five and Five";
+			};
+			name = Debug;
+		};
+		2D75E2361CB49F5700704C3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Fifty-Five and FiveTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fifty-Five and Five.app/Fifty-Five and Five";
+			};
+			name = Release;
+		};
+		2D75E2381CB49F5700704C3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Fifty-Five and FiveUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Fifty-Five and Five";
+			};
+			name = Debug;
+		};
+		2D75E2391CB49F5700704C3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Fifty-Five and FiveUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Fifty-Five and Five";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D75E1FF1CB49F2D00704C3A /* Build configuration list for PBXProject "Fifty-Five and Five" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D75E22F1CB49F5700704C3A /* Debug */,
+				2D75E2301CB49F5700704C3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D75E2311CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and Five" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D75E2321CB49F5700704C3A /* Debug */,
+				2D75E2331CB49F5700704C3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2D75E2341CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D75E2351CB49F5700704C3A /* Debug */,
+				2D75E2361CB49F5700704C3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2D75E2371CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D75E2381CB49F5700704C3A /* Debug */,
+				2D75E2391CB49F5700704C3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2D75E1FC1CB49F2D00704C3A /* Project object */;
+}
