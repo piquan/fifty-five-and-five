@@ -15,6 +15,8 @@
 		2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */; };
 		2D75E2221CB49F5600704C3A /* Fifty_Five_and_FiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */; };
 		2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */; };
+		2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E23B1CB4A59700704C3A /* TimerManager.m */; };
+		2D75E2401CB50A9000704C3A /* alarm.aif in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E23F1CB50A9000704C3A /* alarm.aif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and FiveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_FiveUITests.m; sourceTree = "<group>"; };
 		2D75E22E1CB49F5700704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D75E23A1CB4A59700704C3A /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerManager.h; sourceTree = "<group>"; };
+		2D75E23B1CB4A59700704C3A /* TimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerManager.m; sourceTree = "<group>"; };
+		2D75E23F1CB50A9000704C3A /* alarm.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.aif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +110,9 @@
 				2D75E20B1CB49F4500704C3A /* AppDelegate.m */,
 				2D75E20D1CB49F4600704C3A /* ViewController.h */,
 				2D75E20E1CB49F4800704C3A /* ViewController.m */,
+				2D75E23A1CB4A59700704C3A /* TimerManager.h */,
+				2D75E23B1CB4A59700704C3A /* TimerManager.m */,
+				2D75E23F1CB50A9000704C3A /* alarm.aif */,
 				2D75E2101CB49F4900704C3A /* Main.storyboard */,
 				2D75E2131CB49F4C00704C3A /* Assets.xcassets */,
 				2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */,
@@ -243,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D75E2401CB50A9000704C3A /* alarm.aif in Resources */,
 				2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */,
 				2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */,
 				2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */,
@@ -271,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D75E20F1CB49F4800704C3A /* ViewController.m in Sources */,
+				2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */,
 				2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */,
 				2D75E2091CB49F4500704C3A /* main.m in Sources */,
 			);

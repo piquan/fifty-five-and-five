@@ -10,6 +10,12 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel * whichTimerLabel;
+@property (weak, nonatomic) IBOutlet UILabel * timeRemainingLabel;
+
+- (IBAction)startNextTimer:(id)sender;
+- (IBAction)fiveMoreMinutes:(id)sender;
+- (IBAction)stopTimer:(id)sender;
 
 @end
 
