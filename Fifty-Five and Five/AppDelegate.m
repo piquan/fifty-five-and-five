@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TimerManager.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // FIXME If we're launching in response to a notification, handle it.
+    // FIXME Manage badging for which phase we're in.
+    // FIXME Handle actions.
     
     UIMutableUserNotificationAction * startNextTimerAction = [[UIMutableUserNotificationAction alloc] init];
     startNextTimerAction.identifier = @"startNextTimer";
@@ -52,6 +57,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // This is also where we prepare for the snapshot when we go to the background.  (Yes, here, not in applicationWillEnterBackground:, according to https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/StrategiesforHandlingAppStateTransitions/StrategiesforHandlingAppStateTransitions.html#//apple_ref/doc/uid/TP40007072-CH8-SW27 )
+    [((ViewController*)[application.windows objectAtIndex:0].rootViewController) prepareForSnapshot];
     [[TimerManager sharedInstance] enterBackground];
 }
 

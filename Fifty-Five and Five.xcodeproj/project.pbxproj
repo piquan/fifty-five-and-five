@@ -56,6 +56,7 @@
 		2D75E23A1CB4A59700704C3A /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerManager.h; sourceTree = "<group>"; };
 		2D75E23B1CB4A59700704C3A /* TimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerManager.m; sourceTree = "<group>"; };
 		2D75E23F1CB50A9000704C3A /* alarm.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.aif; sourceTree = "<group>"; };
+		2D75E2411CB7B82E00704C3A /* icon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icon.svg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +115,7 @@
 				2D75E23B1CB4A59700704C3A /* TimerManager.m */,
 				2D75E23F1CB50A9000704C3A /* alarm.aif */,
 				2D75E2101CB49F4900704C3A /* Main.storyboard */,
+				2D75E2411CB7B82E00704C3A /* icon.svg */,
 				2D75E2131CB49F4C00704C3A /* Assets.xcassets */,
 				2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */,
 				2D75E2181CB49F4C00704C3A /* Info.plist */,

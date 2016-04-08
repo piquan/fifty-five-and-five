@@ -18,90 +18,164 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Working Time" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-wG-cC2">
-                                <rect key="frame" x="20" y="28" width="560" height="86"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="55:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="JVK-uN-t17">
-                                <rect key="frame" x="20" y="122" width="560" height="86"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="72"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-KN-mRk">
-                                <rect key="frame" x="20" y="464" width="560" height="116"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gXc-je-ggD">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ph7-9a-UnC">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="290"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-sc-KCz">
+                                                <rect key="frame" x="0.0" y="8" width="600" height="282"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Working Time" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-wG-cC2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="141"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="55:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="JVK-uN-t17">
+                                                        <rect key="frame" x="0.0" y="141" width="600" height="141"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="72"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="HF3-wG-cC2" firstAttribute="leading" secondItem="PqU-sc-KCz" secondAttribute="leading" id="Krp-EB-3Hi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JVK-uN-t17" secondAttribute="trailing" id="PFN-Y4-9PZ"/>
+                                                    <constraint firstItem="JVK-uN-t17" firstAttribute="height" secondItem="HF3-wG-cC2" secondAttribute="height" id="UhX-ke-VF5"/>
+                                                    <constraint firstItem="JVK-uN-t17" firstAttribute="leading" secondItem="PqU-sc-KCz" secondAttribute="leading" id="jMV-Ff-tcB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JVK-uN-t17" secondAttribute="bottom" id="p1T-8Y-JPZ"/>
+                                                    <constraint firstItem="HF3-wG-cC2" firstAttribute="top" secondItem="PqU-sc-KCz" secondAttribute="top" id="qbh-Xr-EZ2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HF3-wG-cC2" secondAttribute="trailing" id="thH-1R-Wc2"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.47450980392156861" green="0.33333333333333331" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="PqU-sc-KCz" firstAttribute="leading" secondItem="ph7-9a-UnC" secondAttribute="leading" id="Idb-nx-rJo"/>
+                                            <constraint firstAttribute="bottom" secondItem="PqU-sc-KCz" secondAttribute="bottom" id="VC3-5X-YqI"/>
+                                            <constraint firstAttribute="trailing" secondItem="PqU-sc-KCz" secondAttribute="trailing" id="bSD-DE-hgp"/>
+                                            <constraint firstItem="PqU-sc-KCz" firstAttribute="top" secondItem="ph7-9a-UnC" secondAttribute="topMargin" id="jth-h6-YPY"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yp4-ra-3aa">
+                                        <rect key="frame" x="0.0" y="290" width="600" height="290"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mYi-1h-vDs">
+                                                <rect key="frame" x="0.0" y="10" width="600" height="270"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qms-if-doc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-KN-mRk">
+                                                                <rect key="frame" x="28" y="18" width="544" height="54"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <state key="normal" title="Next Timer"/>
+                                                                <connections>
+                                                                    <action selector="startNextTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tyn-Xk-iLK"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="KTw-KN-mRk" secondAttribute="bottom" constant="10" id="BDI-NC-f3D"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="10" id="BP4-H8-v8A"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="20" id="jMb-AD-fPn"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="leading" secondItem="qms-if-doc" secondAttribute="leadingMargin" constant="20" id="rmZ-zw-sjn"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="KTw-KN-mRk" secondAttribute="trailing" constant="20" id="zUl-Q0-ecP"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="jMb-AD-fPn"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZt-95-CRA">
+                                                        <rect key="frame" x="0.0" y="90" width="600" height="90"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-yL-At2">
+                                                                <rect key="frame" x="28" y="18" width="544" height="54"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <state key="normal" title="Stop"/>
+                                                                <connections>
+                                                                    <action selector="stopTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2If-Zk-fNh"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="5t4-yL-At2" firstAttribute="top" secondItem="hZt-95-CRA" secondAttribute="topMargin" constant="20" id="7W6-3g-UX5"/>
+                                                            <constraint firstItem="5t4-yL-At2" firstAttribute="top" secondItem="hZt-95-CRA" secondAttribute="topMargin" constant="10" id="Bm6-4N-DfZ"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="5t4-yL-At2" secondAttribute="trailing" constant="20" id="RGX-a9-im1"/>
+                                                            <constraint firstItem="5t4-yL-At2" firstAttribute="leading" secondItem="hZt-95-CRA" secondAttribute="leadingMargin" constant="20" id="dVC-4O-abK"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="5t4-yL-At2" secondAttribute="bottom" constant="10" id="vEq-N3-yLc"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="7W6-3g-UX5"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLu-ie-0Ng">
+                                                        <rect key="frame" x="0.0" y="180" width="600" height="90"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-Ah-ssd">
+                                                                <rect key="frame" x="28" y="18" width="544" height="54"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <state key="normal" title="Five More Minutes"/>
+                                                                <connections>
+                                                                    <action selector="fiveMoreMinutes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lDw-CV-tbD"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="nb5-Ah-ssd" secondAttribute="trailing" constant="20" id="0eZ-US-7ky"/>
+                                                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="top" secondItem="FLu-ie-0Ng" secondAttribute="topMargin" constant="20" id="Pe8-Hx-8rc"/>
+                                                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="top" secondItem="FLu-ie-0Ng" secondAttribute="topMargin" constant="10" id="aet-D4-obS"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="nb5-Ah-ssd" secondAttribute="bottom" constant="10" id="l6a-sg-mVP"/>
+                                                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="leading" secondItem="FLu-ie-0Ng" secondAttribute="leadingMargin" constant="20" id="mWy-4F-AKk"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Pe8-Hx-8rc"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="FLu-ie-0Ng" firstAttribute="height" secondItem="qms-if-doc" secondAttribute="height" id="BNR-bI-F1I"/>
+                                                    <constraint firstItem="hZt-95-CRA" firstAttribute="height" secondItem="qms-if-doc" secondAttribute="height" id="k6i-qh-BEj"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="mYi-1h-vDs" secondAttribute="trailing" id="2sv-XP-GTJ"/>
+                                            <constraint firstItem="mYi-1h-vDs" firstAttribute="top" secondItem="Yp4-ra-3aa" secondAttribute="top" constant="10" id="HJW-QX-E0i"/>
+                                            <constraint firstAttribute="bottom" secondItem="mYi-1h-vDs" secondAttribute="bottom" constant="10" id="MMN-Md-UOc"/>
+                                            <constraint firstItem="mYi-1h-vDs" firstAttribute="leading" secondItem="Yp4-ra-3aa" secondAttribute="leading" id="oo5-AX-XaF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="67" id="JRl-03-sLN"/>
+                                    <constraint firstItem="Yp4-ra-3aa" firstAttribute="leading" secondItem="gXc-je-ggD" secondAttribute="leading" id="XUq-7C-1WW"/>
+                                    <constraint firstAttribute="bottom" secondItem="Yp4-ra-3aa" secondAttribute="bottom" id="ZdQ-tI-lQC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yp4-ra-3aa" secondAttribute="trailing" id="idA-19-04W"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="Next Timer"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JRl-03-sLN"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="startNextTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tyn-Xk-iLK"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-yL-At2">
-                                <rect key="frame" x="20" y="216" width="560" height="116"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="aw8-po-jN7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="Stop"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aw8-po-jN7"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="stopTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2If-Zk-fNh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-Ah-ssd">
-                                <rect key="frame" x="20" y="340" width="560" height="116"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="78" id="Nfs-tN-gek"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <state key="normal" title="Five More Minutes"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Nfs-tN-gek"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="fiveMoreMinutes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lDw-CV-tbD"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5t4-yL-At2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="0L3-Gd-EPV"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KTw-KN-mRk" secondAttribute="bottom" constant="20" id="1Bp-ec-rcB"/>
-                            <constraint firstItem="5t4-yL-At2" firstAttribute="top" secondItem="JVK-uN-t17" secondAttribute="bottom" constant="8" id="6Gf-rO-Kep"/>
-                            <constraint firstItem="KTw-KN-mRk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8Cu-JS-CBI"/>
-                            <constraint firstItem="HF3-wG-cC2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="EYf-7A-bCJ"/>
-                            <constraint firstItem="5t4-yL-At2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="F6F-gT-DPu"/>
-                            <constraint firstItem="JVK-uN-t17" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Fqu-Zw-IcR"/>
-                            <constraint firstItem="HF3-wG-cC2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="GTm-hb-ycm"/>
-                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="nb5-Ah-ssd" secondAttribute="bottom" constant="8" id="IBp-Zs-eN3"/>
-                            <constraint firstItem="JVK-uN-t17" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="LkQ-c9-WcW"/>
-                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="N4m-C6-Zyh"/>
-                            <constraint firstItem="JVK-uN-t17" firstAttribute="top" secondItem="HF3-wG-cC2" secondAttribute="bottom" constant="8" id="RSD-0Z-yoK"/>
-                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="b7Y-T5-L0N"/>
-                            <constraint firstItem="KTw-KN-mRk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ckl-RO-qot"/>
-                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="height" secondItem="5t4-yL-At2" secondAttribute="height" id="hzB-UP-dZA"/>
-                            <constraint firstItem="KTw-KN-mRk" firstAttribute="height" secondItem="5t4-yL-At2" secondAttribute="height" id="kj5-Nr-lHw"/>
-                            <constraint firstItem="nb5-Ah-ssd" firstAttribute="top" secondItem="5t4-yL-At2" secondAttribute="bottom" constant="8" id="o1T-ci-edU"/>
-                            <constraint firstItem="HF3-wG-cC2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="xxS-iZ-JrD"/>
+                            <constraint firstItem="gXc-je-ggD" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="gYx-HW-Sy9"/>
+                            <constraint firstItem="gXc-je-ggD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="lmG-Vs-HcJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gXc-je-ggD" secondAttribute="bottom" id="ski-Me-79L"/>
+                            <constraint firstItem="gXc-je-ggD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="veb-VM-zZO"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="coloringView" destination="ph7-9a-UnC" id="QQJ-Pd-v3a"/>
                         <outlet property="timeRemainingLabel" destination="JVK-uN-t17" id="VQG-7d-u7H"/>
                         <outlet property="whichTimerLabel" destination="HF3-wG-cC2" id="zVO-tB-dVx"/>
                     </connections>

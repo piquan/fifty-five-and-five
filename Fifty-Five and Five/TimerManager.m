@@ -11,9 +11,9 @@
 
 @implementation TimerManager
 
-#define TIME_55 ((NSTimeInterval)55)
+#define TIME_55 ((NSTimeInterval)55*60)
 #define TIME_5 ((NSTimeInterval)5)
-#define TIME_SNOOZE ((NSTimeInterval)5)
+#define TIME_SNOOZE ((NSTimeInterval)5*60)
 
 NSString * kIdRunningMode = @"runningMode";
 NSString * kIdNextAlarm = @"nextAlarm";

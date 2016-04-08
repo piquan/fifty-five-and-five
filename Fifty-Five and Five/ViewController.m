@@ -12,6 +12,10 @@
 @interface ViewController ()
 
 @property NSTimer * refreshTimer;
+@property NSDateComponentsFormatter * timerFormatter;
+@property UIColor * stoppedColor;
+@property UIColor * fiftyFiveColor;
+@property UIColor * fiveColor;
 
 @end
 
@@ -22,6 +26,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     _refreshTimer = nil;
+    _timerFormatter = [[NSDateComponentsFormatter alloc] init];
+    _timerFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+    _timerFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDefault;
+    _stoppedColor = [UIColor colorWithRed:.475 green:.333 blue:.282 alpha:1.0]; // #795548
+    _fiftyFiveColor = [UIColor colorWithRed:.243 green:.314 blue:.706 alpha:1.0]; // #3e50b4
+    _fiveColor = [UIColor colorWithRed:1.0 green:.247 blue:.502 alpha:1.0]; // #ff3f80
     
     [[TimerManager sharedInstance] addObserver:self
                                     forKeyPath:@"runningMode"
@@ -65,6 +75,12 @@
     [super viewDidDisappear:animated];
 }
 
+- (void)prepareForSnapshot
+{
+    self.timeRemainingLabel.text = @"";
+    [self.view snapshotViewAfterScreenUpdates:YES];
+}
+
 - (IBAction)startNextTimer:(id)sender
 {
     [[TimerManager sharedInstance] startNextTimer];
@@ -82,14 +98,19 @@
 {
     enum RunningMode mode = [TimerManager sharedInstance].runningMode;
     NSString * modeString;
+    UIColor * runningColor;
     if (mode == RUNNING_MODE_STOPPED) {
         modeString = NSLocalizedString(@"Stopped", nil);
+        runningColor = _stoppedColor;
     } else if (mode == RUNNING_MODE_55) {
         modeString = NSLocalizedString(@"Working", nil);
+        runningColor = _fiftyFiveColor;
     } else if (mode == RUNNING_MODE_5) {
         modeString = NSLocalizedString(@"Resting", nil);
+        runningColor = _fiveColor;
     }
     self.whichTimerLabel.text = modeString;
+    self.coloringView.backgroundColor = runningColor;
 }
 
 - (void)updateRefreshTimer
@@ -139,12 +160,10 @@
     }
     
     NSTimeInterval timeRemaining = [nextAlarm timeIntervalSinceNow];
-    // FIXME Is there anything locale-specific I should do here instead?
     if (timeRemaining < 0) {
-        return @"0:00";
-    } else {
-        return [NSString stringWithFormat:@"%i:%02i", ((int)timeRemaining / 60), ((int)timeRemaining % 60)];
+        timeRemaining = 0;
     }
+    return [self.timerFormatter stringFromTimeInterval:timeRemaining];
 }
 
 @end
