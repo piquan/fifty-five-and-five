@@ -1,8 +1,7 @@
-<!-- -*- mode: nxml; compile-command: "convert 55a5.svg 55a5.png && pngcrush -o\
-w -rem tEXt -rem pHYs 55a5.png" -*- -->                                         
-<svg xmlns="http://www.w3.org/2000/svg"                                         
-     width="76" height="76" viewBox="-1.1 -1.1 2.2 2.2">                        
-  <rect x="-1" y="-1" width="2" height="2" fill="#ffffff" />                    
-  <path d="M 0 -1 A 1 1 0 1 1 -0.500 -0.866 L 0 0 L 0 -1" fill="#3e50b4" />     
-  <path d="M 0 -1 A 1 1 0 0 0 -0.500 -0.866 L 0 0 L 0 -1" fill="#ff3f80" />     
-</svg>                                                                          
+<!-- -*- mode: nxml; compile-command: "for s in 58 87 80 120 180 29 40 76 152 167 1024 ; do sed -e s/1024/$s/g < 55a5.svg | convert svg:- icon-$s.png && pngcrush -ow -rem tEXt -rem pHYs icon-$s.png ; done" -*- -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
+     viewBox="-1.1 -1.1 2.2 2.2">
+  <rect x="-1" y="-1" width="2" height="2" fill="#ffffff" />
+  <path d="M 0 -1 A 1 1 0 1 1 -0.500 -0.866 L 0 0 L 0 -1" fill="#3e50b4" />
+  <path d="M 0 -1 A 1 1 0 0 0 -0.500 -0.866 L 0 0 L 0 -1" fill="#ff3f80" />
+</svg>

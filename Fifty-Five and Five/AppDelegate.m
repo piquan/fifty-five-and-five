@@ -21,27 +21,23 @@
     // Override point for customization after application launch.
     
     // FIXME If we're launching in response to a notification, handle it.
-    // FIXME Manage badging for which phase we're in.
     // FIXME Handle actions.
     
-    UIMutableUserNotificationAction * startNextTimerAction = [[UIMutableUserNotificationAction alloc] init];
-    startNextTimerAction.identifier = @"startNextTimer";
-    startNextTimerAction.title = NSLocalizedString(@"Next Timer", nil);
-    startNextTimerAction.activationMode = UIUserNotificationActivationModeBackground;
+    // If you change these, be sure to also change the actions in TimerManager.m.
     UIMutableUserNotificationAction * snoozeAction = [[UIMutableUserNotificationAction alloc] init];
-    snoozeAction.identifier = @"snoozeTimer";
+    snoozeAction.identifier = @"snooze";
     snoozeAction.title = NSLocalizedString(@"Snooze", nil);
     snoozeAction.activationMode = UIUserNotificationActivationModeBackground;
     UIMutableUserNotificationAction * stopAction = [[UIMutableUserNotificationAction alloc] init];
-    stopAction.identifier = @"stopTimer";
+    stopAction.identifier = @"stop";
     stopAction.title = NSLocalizedString(@"Stop", nil);
     stopAction.destructive = YES;
     stopAction.activationMode = UIUserNotificationActivationModeBackground;
     
     UIMutableUserNotificationCategory * alarmCategory = [[UIMutableUserNotificationCategory alloc] init];
     alarmCategory.identifier = @"alarm";
-    [alarmCategory setActions:@[stopAction, snoozeAction, startNextTimerAction] forContext:UIUserNotificationActionContextDefault];
-    [alarmCategory setActions:@[snoozeAction, startNextTimerAction] forContext:UIUserNotificationActionContextMinimal];
+    [alarmCategory setActions:@[stopAction, snoozeAction] forContext:UIUserNotificationActionContextDefault];
+    [alarmCategory setActions:@[snoozeAction] forContext:UIUserNotificationActionContextMinimal];
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:[NSSet setWithObject:alarmCategory]]];
     
@@ -57,8 +53,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    // This is also where we prepare for the snapshot when we go to the background.  (Yes, here, not in applicationWillEnterBackground:, according to https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/StrategiesforHandlingAppStateTransitions/StrategiesforHandlingAppStateTransitions.html#//apple_ref/doc/uid/TP40007072-CH8-SW27 )
-    [((ViewController*)[application.windows objectAtIndex:0].rootViewController) prepareForSnapshot];
     [[TimerManager sharedInstance] enterBackground];
 }
 
@@ -78,13 +72,22 @@
 
 #pragma mark - Notification management
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSLog(@"Received notification %@ in state %li", notification, (long)application.applicationState);
+    if (application.applicationState == UIApplicationStateActive) {
+        [[TimerManager sharedInstance] alarmFired];
+    } else {
+        [[TimerManager sharedInstance] alarmAcknowledged];
+    }
+}
+
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler
 {
-    if ([identifier isEqualToString:@"startNextTimer"]) {
-        [[TimerManager sharedInstance] startNextTimer];
-    } else if ([identifier isEqualToString:@"snoozeTimer"]) {
-        [[TimerManager sharedInstance] fiveMoreMinutes];
-    } else if ([identifier isEqualToString:@"stopTimer"]) {
+    NSLog(@"Handling action %@ %@", identifier, notification);
+    if ([identifier isEqualToString:@"snooze"]) {
+        [[TimerManager sharedInstance] snooze];
+    } else if ([identifier isEqualToString:@"stop"]) {
         [[TimerManager sharedInstance] stopTimer];
     }
     completionHandler();

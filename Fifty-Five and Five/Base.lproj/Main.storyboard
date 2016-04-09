@@ -27,7 +27,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PqU-sc-KCz">
                                                 <rect key="frame" x="0.0" y="8" width="600" height="282"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Working Time" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-wG-cC2">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Stopped" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="HF3-wG-cC2">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="141"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="72"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,34 +65,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mYi-1h-vDs">
                                                 <rect key="frame" x="0.0" y="10" width="600" height="270"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qms-if-doc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
-                                                        <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-KN-mRk">
-                                                                <rect key="frame" x="28" y="18" width="544" height="54"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                                <state key="normal" title="Next Timer"/>
-                                                                <connections>
-                                                                    <action selector="startNextTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tyn-Xk-iLK"/>
-                                                                </connections>
-                                                            </button>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="KTw-KN-mRk" secondAttribute="bottom" constant="10" id="BDI-NC-f3D"/>
-                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="10" id="BP4-H8-v8A"/>
-                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="20" id="jMb-AD-fPn"/>
-                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="leading" secondItem="qms-if-doc" secondAttribute="leadingMargin" constant="20" id="rmZ-zw-sjn"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="KTw-KN-mRk" secondAttribute="trailing" constant="20" id="zUl-Q0-ecP"/>
-                                                        </constraints>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="jMb-AD-fPn"/>
-                                                            </mask>
-                                                        </variation>
-                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hZt-95-CRA">
-                                                        <rect key="frame" x="0.0" y="90" width="600" height="90"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-yL-At2">
                                                                 <rect key="frame" x="28" y="18" width="544" height="54"/>
@@ -117,6 +91,32 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qms-if-doc">
+                                                        <rect key="frame" x="0.0" y="90" width="600" height="90"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-KN-mRk">
+                                                                <rect key="frame" x="28" y="18" width="544" height="54"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <state key="normal" title="Continue"/>
+                                                                <connections>
+                                                                    <action selector="startNextTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tyn-Xk-iLK"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="KTw-KN-mRk" secondAttribute="bottom" constant="10" id="BDI-NC-f3D"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="10" id="BP4-H8-v8A"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="top" secondItem="qms-if-doc" secondAttribute="topMargin" constant="20" id="jMb-AD-fPn"/>
+                                                            <constraint firstItem="KTw-KN-mRk" firstAttribute="leading" secondItem="qms-if-doc" secondAttribute="leadingMargin" constant="20" id="rmZ-zw-sjn"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="KTw-KN-mRk" secondAttribute="trailing" constant="20" id="zUl-Q0-ecP"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="jMb-AD-fPn"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLu-ie-0Ng">
                                                         <rect key="frame" x="0.0" y="180" width="600" height="90"/>
                                                         <subviews>
@@ -124,7 +124,7 @@
                                                                 <rect key="frame" x="28" y="18" width="544" height="54"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                                <state key="normal" title="Five More Minutes"/>
+                                                                <state key="normal" title="Extra Time"/>
                                                                 <connections>
                                                                     <action selector="fiveMoreMinutes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lDw-CV-tbD"/>
                                                                 </connections>

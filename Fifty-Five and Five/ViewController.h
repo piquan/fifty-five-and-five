@@ -14,8 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel * whichTimerLabel;
 @property (weak, nonatomic) IBOutlet UILabel * timeRemainingLabel;
 
-- (void)prepareForSnapshot;
-
 - (IBAction)startNextTimer:(id)sender;
 - (IBAction)fiveMoreMinutes:(id)sender;
 - (IBAction)stopTimer:(id)sender;

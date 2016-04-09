@@ -10,14 +10,14 @@
 
 @interface TimerManager : NSObject
 
-enum RunningMode {
-    RUNNING_MODE_STOPPED,
-    RUNNING_MODE_55,
-    RUNNING_MODE_5
+enum RunningTimer {
+    TIMER_STOPPED,
+    TIMER_55,
+    TIMER_5
 };
 
-@property enum RunningMode runningMode;
-@property NSDate * _Nullable nextAlarm;
+@property (readonly) enum RunningTimer runningTimer;
+@property (readonly) NSDate * _Nullable nextAlarm;
 
 + (TimerManager * _Nonnull)sharedInstance;
 
@@ -26,7 +26,11 @@ enum RunningMode {
 - (void)enterForeground;
 - (void)enterBackground;
 
+- (void)alarmFired;
+- (void)alarmAcknowledged;
+
 - (void)startNextTimer;
+- (void)snooze;
 - (void)fiveMoreMinutes;
 - (void)stopTimer;
 
