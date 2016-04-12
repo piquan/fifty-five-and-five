@@ -58,15 +58,24 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
         timerFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDefault;
         
         _timers = [NSMutableOrderedSet orderedSetWithOrderedSet:timers];
+        _snoozeInterval = snoozeInterval;
         _runningTimer = runningTimer;
         _nextAlarm = nextAlarm;
-        _snoozeInterval = snoozeInterval;
-
         [self updateColors];
+
+        if (nextAlarm) {
+            NSDate * now = [NSDate date];
+            NSUInteger offset = 0;
+            while ([nextAlarm compare:now] != NSOrderedDescending) {
+                offset++;
+                runningTimer = [self timerAtOffset:offset];
+                nextAlarm = [nextAlarm dateByAddingTimeInterval:runningTimer.interval];
+            }
+            _runningTimer = runningTimer;
+            _nextAlarm = nextAlarm;
+        }
         
-        // FIXME If nextAlarm has passed, then play catch-up.
-        
-        [self setupNotification];
+        [self setupNotifications];
     }
     return self;
 }
@@ -193,7 +202,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     [self didChangeValueForKey:@"nextAlarm"];
     [self didChangeValueForKey:@"runningTimer"];
     
-    [self setupNotification];
+    [self setupNotifications];
     [self save];
 }
 
@@ -204,7 +213,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     [self didChangeValueForKey:@"nextAlarm"];
 
     [self save];
-    [self setupNotification];
+    [self setupNotifications];
 }
 
 - (void)switchToTimer:(Timer * _Nonnull)timer
@@ -252,7 +261,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 
 #pragma mark - Notifications
 
-- (void)setupNotification
+- (void)setupNotifications
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     if (!self.runningTimer)
@@ -262,14 +271,41 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     NSDate * now = [NSDate date];
     if ([now compare:nextAlarm] != NSOrderedAscending)
         return;
-    UILocalNotification * notification = [[UILocalNotification alloc] init];
-    notification.fireDate = nextAlarm;
-    notification.alertBody = [[self nextTimer] callToAction];
-    notification.category = @"alarm";
-    notification.soundName = @"alarm.aif";
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
     // FIXME Arrange an NSTimer to preload the sound if we're in the foreground.
+
+    NSUInteger totalTime = 0;
+    for (Timer * timer in _timers) {
+        totalTime += timer.interval;
+    }
+    NSCalendarUnit repeatInterval =
+        totalTime == 60 ? NSCalendarUnitMinute :
+        totalTime == 60 * 60 ? NSCalendarUnitHour :
+        totalTime == 24 * 60 * 60 ? NSCalendarUnitDay:
+        NSCalendarUnitEra;
+
+    UILocalNotification * notificationTemplate = [[UILocalNotification alloc] init];
+    notificationTemplate.category = @"alarm";
+    notificationTemplate.soundName = @"alarm.aif";
+    
+    NSUInteger notificationCount;
+    if (repeatInterval != NSCalendarUnitEra) {
+        notificationTemplate.repeatInterval = repeatInterval;
+        notificationCount = MIN(64, _timers.count);
+    } else {
+        notificationCount = 64;
+    }
+    
+    NSDate * offsetDate = nextAlarm;
+    for (int offset = 0; offset < notificationCount; offset++) {
+        UILocalNotification * notification = [notificationTemplate copy];
+        Timer * offsetTimer = [self timerAtOffset:offset];
+        notification.fireDate = offsetDate;
+        notification.alertBody = [[self timerAtOffset:offset + 1] callToAction];
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        NSLog(@"Scheduled notification with offset %i: %@", offset, notification);
+        offsetDate = [NSDate dateWithTimeInterval:offsetTimer.interval sinceDate:offsetDate];
+    }
 }
 
 - (void)alarmFired

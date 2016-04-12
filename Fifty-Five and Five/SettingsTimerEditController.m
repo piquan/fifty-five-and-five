@@ -52,7 +52,7 @@
 - (IBAction)intervalFieldChanged:(id)sender
 {
     // TODO This should also work with a hardware keyboard.
-    _timer.interval = self.datePicker.countDownDuration;
+    _timer.interval = self.datePicker.countDownDuration / 60;  // XXX DEBUGGING HACK
     self.intervalField.text = [[TimerManager sharedInstance] stringForTimerInterval:_timer];
     NSLog(@"Now at interval %f text %@", _timer.interval, self.intervalField.text);
 }
