@@ -18,5 +18,7 @@
 - (IBAction)fiveMoreMinutes:(id)sender;
 - (IBAction)stopTimer:(id)sender;
 
+- (IBAction)doneWithSettings:(UIStoryboardSegue*)unwindSegue;
+
 @end
 

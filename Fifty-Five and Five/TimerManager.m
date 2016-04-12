@@ -13,15 +13,23 @@
 
 @implementation TimerManager {
     AVAudioPlayer * _Nullable playingAlarm;
+    NSDateComponentsFormatter * _Nonnull timerFormatter;
 }
 
-NSString * kIdRunningTimer = @"runningTimer";
-NSString * kIdNextAlarm = @"nextAlarm";
-NSDictionary * defaultTimes;
+static NSString * kTimers = @"timers";
+static NSString * kRunningTimer = @"runningTimer";
+static NSString * kNextAlarm = @"nextAlarm";
+static NSString * kSnoozeInterval = @"snoozeInterval";
 
-+ (void)load
++ (NSString*)modelPath
 {
-    defaultTimes = @{@"time55": @"55", @"time5": @"5", @"timeSnooze": @"5"};
+    NSURL * applicationSupport = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory
+                                                                        inDomain:NSUserDomainMask
+                                                               appropriateForURL:nil
+                                                                          create:YES
+                                                                           error:nil];
+    NSURL * url = [NSURL URLWithString:@"Timers.plist" relativeToURL:applicationSupport];
+    return [url path];
 }
 
 + (TimerManager*)sharedInstance
@@ -29,25 +37,82 @@ NSDictionary * defaultTimes;
     static TimerManager * rv;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        rv = [[TimerManager alloc] init];
+        rv = [NSKeyedUnarchiver unarchiveObjectWithFile:[self modelPath]];
+        if (!rv)
+            rv = [[TimerManager alloc] init];
     });
     return rv;
 }
 
-- (id)init
+- (id)initWithTimers:(NSOrderedSet<Timer*> * _Nonnull)timers
+        runningTimer:(Timer * _Nullable)runningTimer
+           nextAlarm:(NSDate * _Nullable)nextAlarm
+      snoozeInterval:(NSTimeInterval)snoozeInterval
 {
     self = [super init];
     if (self) {
-        NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-        [defaults registerDefaults:defaultTimes];
-        [defaults synchronize];
-        _runningTimer = (enum RunningTimer)[defaults integerForKey:kIdRunningTimer];
-        _nextAlarm = [defaults objectForKey:kIdNextAlarm];
-        // FIXME What if _nextAlarm has passed?
+        
+        // If you change this, consider changing the one in ViewController.
+        timerFormatter = [[NSDateComponentsFormatter alloc] init];
+        timerFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+        timerFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDefault;
+        
+        _timers = [NSMutableOrderedSet orderedSetWithOrderedSet:timers];
+        _runningTimer = runningTimer;
+        _nextAlarm = nextAlarm;
+        _snoozeInterval = snoozeInterval;
+
+        [self updateColors];
+        
+        // FIXME If nextAlarm has passed, then play catch-up.
         
         [self setupNotification];
     }
     return self;
+}
+
+- (id)init
+{
+    NSLog(@"Initializing data store");
+    Timer *timer55 = [[Timer alloc] initWithName:NSLocalizedString(@"Work", nil)
+                                        interval:55 * 60];
+    Timer *timer5 =  [[Timer alloc] initWithName:NSLocalizedString(@"Rest", nil)
+                                        interval:5 * 60];
+    
+    return [self initWithTimers:[NSOrderedSet orderedSetWithObjects:timer55, timer5, nil]
+                   runningTimer:nil
+                      nextAlarm:nil
+                 snoozeInterval:5 * 60];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (!self)
+        return self;
+    
+    return [self initWithTimers:[decoder decodeObjectForKey:kTimers]
+                   runningTimer:[decoder decodeObjectForKey:kRunningTimer]
+                      nextAlarm:[decoder decodeObjectForKey:kNextAlarm]
+                 snoozeInterval:[decoder decodeDoubleForKey:kSnoozeInterval]];
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    // FIXME Looking at the plist is inscrutible.  This seems to work, but be sure about
+    // boundary cases.
+    [coder encodeObject:_timers forKey:kTimers];
+    [coder encodeConditionalObject:_runningTimer forKey:kRunningTimer];
+    [coder encodeObject:_nextAlarm forKey:kNextAlarm];
+    [coder encodeDouble:_snoozeInterval forKey:kSnoozeInterval];
+}
+
+- (void)save {
+    // FIXME Make this asynchronous
+    BOOL success = [NSKeyedArchiver archiveRootObject:self toFile:[[self class] modelPath]];
+    if (!success) {
+        NSLog(@"State saving to %@ failed", [[self class] modelPath]);
+    }
 }
 
 - (AVAudioPlayer*)newPlayingAlarm
@@ -59,27 +124,49 @@ NSDictionary * defaultTimes;
                                           error:nil];
 }
 
-- (NSTimeInterval)definedInterval:(NSString * _Nonnull)key
+- (void)updateColors
 {
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSString * timeString = [defaults stringForKey:key];
-    if (!timeString) {
-        [defaults removeObjectForKey:key];
-        [defaults synchronize];
-        timeString = [defaultTimes objectForKey:key];
-        assert(timeString);
+    // Original colors were #3e50b4 for work, #ff3f80 for rest, #795548 for stopped.
+    // FIXME Improve the color selection algorithm to prefer that adjacent colors are far apart
+    // in hue.
+    NSUInteger timerCount = _timers.count + 1;
+    NSUInteger timerCountDest = timerCount;
+    NSUInteger timerCountRoundedUp = 1;
+    NSUInteger timerBits = 0;
+    while (timerCountDest) {
+        timerBits++;
+        timerCountDest >>= 1;
+        timerCountRoundedUp <<= 1;
     }
-    NSInteger timeInt = [timeString integerValue];
-    if (!timeInt) {
-        [defaults removeObjectForKey:key];
-        [defaults synchronize];
-        timeInt = [[defaultTimes objectForKey:key] integerValue];
-        assert(timeInt);
-    }
-    if ([defaults boolForKey:@"fastTimes"])
-        return timeInt * 1.0;
-    else
-        return timeInt * 60.0;
+    [_timers enumerateObjectsUsingBlock:^(Timer * _Nonnull timer, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSUInteger hueInt = 0;
+        for (NSUInteger i = 0; i < timerBits; i++) {
+            hueInt <<= 1;
+            hueInt |= (idx & 1);
+            idx >>= 1;
+        }
+        // The offset is to make the first few colors a little more aesthetically pleasing;
+        // a 0.0 hue is solid red, which can be jarring.
+        CGFloat hue = (((float)hueInt) / timerCountRoundedUp) + 0.8;
+        if (hue > 1.0)
+            hue -= 1.0;
+        timer.color = [UIColor colorWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
+    }];
+}
+
+- (Timer *)newTimer
+{
+    Timer * newTimer = [[Timer alloc] initWithName:NSLocalizedString(@"New Timer", nil)
+                                          interval:5 * 60];
+    [[TimerManager sharedInstance].timers addObject:newTimer];
+    [self updateColors];
+    [self save];
+    return newTimer;
+}
+
+- (NSString*)stringForTimerInterval:(Timer *)timer
+{
+    return [timerFormatter stringFromTimeInterval:timer.interval];
 }
 
 #pragma mark - runningTimer and nextAlarm
@@ -93,8 +180,8 @@ NSDictionary * defaultTimes;
     }
 }
 
-- (void)switchToTimer:(enum RunningTimer)timer
-         forAlarmTime:(NSDate *)alarmTime
+- (void)switchToTimer:(Timer * _Nullable)timer
+         forAlarmTime:(NSDate * _Nullable)alarmTime
 {
     // We do this here instead of in the view controller, since I'm not sure if the view controller can be freed while we're in the background.
     [[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
@@ -106,12 +193,8 @@ NSDictionary * defaultTimes;
     [self didChangeValueForKey:@"nextAlarm"];
     [self didChangeValueForKey:@"runningTimer"];
     
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:_runningTimer forKey:kIdRunningTimer];
-    [defaults setObject:_nextAlarm forKey:kIdNextAlarm];
-    [defaults synchronize];
-    
     [self setupNotification];
+    [self save];
 }
 
 - (void)addInterval:(NSTimeInterval)interval
@@ -119,91 +202,74 @@ NSDictionary * defaultTimes;
     [self willChangeValueForKey:@"nextAlarm"];
     _nextAlarm = [_nextAlarm dateByAddingTimeInterval:interval];
     [self didChangeValueForKey:@"nextAlarm"];
-    
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:_nextAlarm forKey:kIdNextAlarm];
-    [defaults synchronize];
-    
+
+    [self save];
     [self setupNotification];
 }
 
-- (void)switchToTimer:(enum RunningTimer)timer
+- (void)switchToTimer:(Timer * _Nonnull)timer
           forInterval:(NSTimeInterval)interval
 {
     [self switchToTimer:timer
            forAlarmTime:[NSDate dateWithTimeIntervalSinceNow:interval]];
 }
 
-- (void)switchToTimer:(enum RunningTimer)timer
+- (void)switchToTimer:(Timer * _Nullable)timer
 {
-    switch (timer) {
-        case TIMER_STOPPED:
-            [self switchToTimer:timer forAlarmTime:nil];
-            break;
-        case TIMER_55:
-            [self switchToTimer:timer forInterval:[self definedInterval:@"time55"]];
-            break;
-        case TIMER_5:
-            [self switchToTimer:timer forInterval:[self definedInterval:@"time5"]];
-            break;
-        default:
-            abort();
+    if (timer) {
+        [self switchToTimer:timer forInterval:timer.interval];
+    } else {
+        [self switchToTimer:timer forAlarmTime:nil];
     }
 }
 
-- (void)switchToOtherTimerForInterval:(NSTimeInterval)interval
+- (void)switchToNextTimerForInterval:(NSTimeInterval)interval
 {
-    [self switchToTimer:[self otherTimer] forInterval:interval];
+    [self switchToTimer:[self nextTimer] forInterval:interval];
 }
 
-- (void)switchToOtherTimer
+- (void)switchToNextTimer
 {
-    [self switchToTimer:[self otherTimer]];
+    [self switchToTimer:[self nextTimer]];
 }
 
-- (enum RunningTimer)otherTimer
+- (Timer * _Nonnull)nextTimer
 {
-    switch (_runningTimer) {
-        case TIMER_STOPPED:
-            return TIMER_55;
-        case TIMER_55:
-            return TIMER_5;
-        case TIMER_5:
-            return TIMER_55;
-        default:
-            abort();
-    }
+    return [self timerAtOffset:1];
+}
+
+- (Timer * _Nonnull)timerAtOffset:(NSInteger)offset
+{
+    NSOrderedSet <Timer*> *timers = self.timers;
+    if (!self.runningTimer)
+        return [timers objectAtIndex:(offset - 1) % timers.count];
+    NSUInteger idx = [self.timers indexOfObject:self.runningTimer];
+    if (idx == NSNotFound)
+        return [timers objectAtIndex:(offset - 1) % timers.count];
+    NSUInteger newIdx = (idx + offset) % self.timers.count;
+    return [timers objectAtIndex:newIdx];
 }
 
 #pragma mark - Notifications
 
-- (NSString*)callToActionForTimer:(enum RunningTimer)timer
-{
-    switch (timer) {
-        case TIMER_STOPPED: return NSLocalizedString(@"Time to stop", nil);
-        case TIMER_55: return NSLocalizedString(@"Time to work", nil);
-        case TIMER_5: return NSLocalizedString(@"Time to rest", nil);
-        default: abort();
-    }
-}
-
 - (void)setupNotification
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    if (_runningTimer == TIMER_STOPPED)
+    if (!self.runningTimer)
         return;
-    assert(_nextAlarm);
+    NSDate * nextAlarm = self.nextAlarm;
+    assert(nextAlarm);
     NSDate * now = [NSDate date];
-    if ([now compare:_nextAlarm] != NSOrderedAscending)
+    if ([now compare:nextAlarm] != NSOrderedAscending)
         return;
     UILocalNotification * notification = [[UILocalNotification alloc] init];
-    notification.fireDate = _nextAlarm;
-    notification.alertBody = [self callToActionForTimer:[self otherTimer]];
+    notification.fireDate = nextAlarm;
+    notification.alertBody = [[self nextTimer] callToAction];
     notification.category = @"alarm";
     notification.soundName = @"alarm.aif";
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
-    // FIXME Arrange an NSTimer to start the sound if we're in the foreground.
+    // FIXME Arrange an NSTimer to preload the sound if we're in the foreground.
 }
 
 - (void)alarmFired
@@ -216,7 +282,7 @@ NSDictionary * defaultTimes;
     
     NSString * appName = [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:appName
-                                                                   message:[self callToActionForTimer:_runningTimer]
+                                                                   message:[self.runningTimer callToAction]
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction* stopAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Stop", nil)
@@ -247,7 +313,7 @@ NSDictionary * defaultTimes;
     [appDelegate.window.rootViewController presentViewController:alert
                                                         animated:YES
                                                       completion:^{
-                                                          [self switchToOtherTimer];
+                                                          [self switchToNextTimer];
                                                           [playingAlarm play];
                                                       }];
 }
@@ -291,22 +357,20 @@ NSDictionary * defaultTimes;
 
 - (void)startNextTimer
 {
-    [self switchToOtherTimer];
+    [self switchToNextTimer];
 }
 
 - (void)snooze
 {
     [playingAlarm stop];
     playingAlarm = nil;
-    [self switchToOtherTimerForInterval:[self definedInterval:@"timeSnooze"]];
+    [self switchToNextTimerForInterval:self.snoozeInterval];
 }
 
 - (void)fiveMoreMinutes
 {
-    NSTimeInterval timeSnooze = [self definedInterval:@"timeSnooze"];
-
-    if (_runningTimer == TIMER_STOPPED) {
-        [self switchToOtherTimerForInterval:timeSnooze];
+    if (!self.runningTimer) {
+        [self switchToTimer:[self timerAtOffset:-1] forInterval:self.snoozeInterval];
         return;
     }
     
@@ -316,11 +380,108 @@ NSDictionary * defaultTimes;
         return;
     }
     
-    [self addInterval:timeSnooze];
+    [self addInterval:self.snoozeInterval];
 }
 
 - (void)stopTimer {
-    [self switchToTimer:TIMER_STOPPED];
+    [self switchToTimer:nil];
 }
+
+#pragma mark - UITableViewDataSource
+
+- (Timer * _Nullable)timerForIndexPath:(NSIndexPath * _Nonnull)indexPath
+{
+    assert(indexPath.section == 0);
+    if (indexPath.row == _timers.count)
+        // This is the insert row
+        return nil;
+    else
+        return [_timers objectAtIndex:indexPath.row];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView.editing)
+        return self.timers.count + 1;
+    else
+        return self.timers.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Timer * timer = [self timerForIndexPath:indexPath];
+    NSLog(@"Configuring cell for %@", timer.name);
+
+    if (timer == nil) {
+        return [tableView dequeueReusableCellWithIdentifier:@"timerInsert" forIndexPath:indexPath];
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timer" forIndexPath:indexPath];
+    cell.textLabel.text = timer.name;
+    cell.detailTextLabel.text = [timerFormatter stringFromTimeInterval:timer.interval];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_timers.count == 1 && indexPath.row == 0)
+        return NO;
+    return YES;
+}
+    
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.timers removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self save];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    [self.timers moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:fromIndexPath.row] toIndex:toIndexPath.row];
+    [self save];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == _timers.count)
+        return NO;
+    if (_timers.count == 1 && indexPath.row == 0)
+        return NO;
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == _timers.count)
+        return UITableViewCellEditingStyleInsert;
+    if (tableView.editing)
+        return UITableViewCellEditingStyleDelete;
+    return UITableViewCellEditingStyleNone;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView
+targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+                toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+
+{
+    assert(sourceIndexPath.section == 0);
+    assert(proposedDestinationIndexPath.section == 0);
+    if (proposedDestinationIndexPath.row >= _timers.count) {
+        return [NSIndexPath indexPathForRow:_timers.count inSection:0];
+    }
+    return proposedDestinationIndexPath;
+}
+
+- (NSIndexPath *)highestMoveDestinationIndexPathForTableView:(UITableView *)tableView
+{
+    return [NSIndexPath indexPathForRow:_timers.count inSection:0];
+}
+
 
 @end

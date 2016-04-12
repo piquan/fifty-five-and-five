@@ -13,9 +13,6 @@
 
 @property NSTimer * refreshTimer;
 @property NSDateComponentsFormatter * timerFormatter;
-@property UIColor * stoppedColor;
-@property UIColor * fiftyFiveColor;
-@property UIColor * fiveColor;
 
 @end
 
@@ -26,15 +23,14 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     _refreshTimer = nil;
+    // If you change this, it may be worth changing the one in TimerManager.
+    //
     // It may be worth noting that the _timerFormatter is not quite consistent in handling single digits.
     // If it's previously written "1:00" (or similar), it will keep using two-digit seconds even <10.
     // But until then, it will use single digits for seconds <10.
     _timerFormatter = [[NSDateComponentsFormatter alloc] init];
     _timerFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
     _timerFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorDefault;
-    _stoppedColor = [UIColor colorWithRed:.475 green:.333 blue:.282 alpha:1.0]; // #795548
-    _fiftyFiveColor = [UIColor colorWithRed:.243 green:.314 blue:.706 alpha:1.0]; // #3e50b4
-    _fiveColor = [UIColor colorWithRed:1.0 green:.247 blue:.502 alpha:1.0]; // #ff3f80
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prepareForSnapshot:)
@@ -105,21 +101,18 @@
 
 - (void)updateRunningTimer
 {
-    enum RunningTimer timer = [TimerManager sharedInstance].runningTimer;
-    NSString * timerString;
-    UIColor * timerColor;
-    if (timer == TIMER_STOPPED) {
-        timerString = NSLocalizedString(@"Stopped", nil);
-        timerColor = _stoppedColor;
-    } else if (timer == TIMER_55) {
-        timerString = NSLocalizedString(@"Working", nil);
-        timerColor = _fiftyFiveColor;
-    } else if (timer == TIMER_5) {
-        timerString = NSLocalizedString(@"Resting", nil);
-        timerColor = _fiveColor;
+    Timer * timer = [TimerManager sharedInstance].runningTimer;
+    UIColor * color;
+    if (timer) {
+        self.whichTimerLabel.text = [[timer name] capitalizedStringWithLocale:[NSLocale currentLocale]];
+        color = [timer color];
+    } else {
+        self.whichTimerLabel.text = NSLocalizedString(@"Stopped", nil);
+        color = [UIColor darkGrayColor];
     }
-    self.whichTimerLabel.text = timerString;
-    self.coloringView.backgroundColor = timerColor;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.coloringView.backgroundColor = color;
+    }];
 }
 
 - (void)updateRefreshTimer
@@ -175,6 +168,12 @@
     // We round tenths of a second up, since odds are we didn't get called exactly at the refresh time.
     timeRemaining += 0.1;
     return [self.timerFormatter stringFromTimeInterval:timeRemaining];
+}
+
+#pragma mark - Navigation
+
+- (IBAction)doneWithSettings:(UIStoryboardSegue*)unwindSegue
+{
 }
 
 @end

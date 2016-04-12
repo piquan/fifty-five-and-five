@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D6444421CBB86620074BD8B /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6444411CBB86620074BD8B /* SettingsController.m */; };
 		2D75E2091CB49F4500704C3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2081CB49F4500704C3A /* main.m */; };
 		2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E20B1CB49F4500704C3A /* AppDelegate.m */; };
 		2D75E20F1CB49F4800704C3A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E20E1CB49F4800704C3A /* ViewController.m */; };
@@ -17,7 +18,8 @@
 		2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */; };
 		2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E23B1CB4A59700704C3A /* TimerManager.m */; };
 		2D75E2401CB50A9000704C3A /* alarm.aif in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E23F1CB50A9000704C3A /* alarm.aif */; };
-		2D75E2441CB8B65900704C3A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2431CB8B65900704C3A /* Settings.bundle */; };
+		2D75E2471CB9CB1E00704C3A /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2461CB9CB1E00704C3A /* Timer.m */; };
+		2DC4BF861CBC6E2D00E56398 /* SettingsTimerEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D6444401CBB86620074BD8B /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		2D6444411CBB86620074BD8B /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fifty-Five and Five.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D75E2081CB49F4500704C3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D75E20A1CB49F4500704C3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,7 +62,10 @@
 		2D75E23B1CB4A59700704C3A /* TimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerManager.m; sourceTree = "<group>"; };
 		2D75E23F1CB50A9000704C3A /* alarm.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.aif; sourceTree = "<group>"; };
 		2D75E2411CB7B82E00704C3A /* icon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icon.svg; sourceTree = SOURCE_ROOT; };
-		2D75E2431CB8B65900704C3A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		2D75E2451CB9CB1E00704C3A /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		2D75E2461CB9CB1E00704C3A /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		2DC4BF841CBC6E2D00E56398 /* SettingsTimerEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTimerEditController.h; sourceTree = "<group>"; };
+		2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTimerEditController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,14 +120,19 @@
 				2D75E20B1CB49F4500704C3A /* AppDelegate.m */,
 				2D75E20D1CB49F4600704C3A /* ViewController.h */,
 				2D75E20E1CB49F4800704C3A /* ViewController.m */,
+				2D75E2451CB9CB1E00704C3A /* Timer.h */,
+				2D75E2461CB9CB1E00704C3A /* Timer.m */,
 				2D75E23A1CB4A59700704C3A /* TimerManager.h */,
 				2D75E23B1CB4A59700704C3A /* TimerManager.m */,
+				2D6444401CBB86620074BD8B /* SettingsController.h */,
+				2D6444411CBB86620074BD8B /* SettingsController.m */,
+				2DC4BF841CBC6E2D00E56398 /* SettingsTimerEditController.h */,
+				2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */,
 				2D75E23F1CB50A9000704C3A /* alarm.aif */,
 				2D75E2411CB7B82E00704C3A /* icon.svg */,
 				2D75E2101CB49F4900704C3A /* Main.storyboard */,
 				2D75E2131CB49F4C00704C3A /* Assets.xcassets */,
 				2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */,
-				2D75E2431CB8B65900704C3A /* Settings.bundle */,
 				2D75E2181CB49F4C00704C3A /* Info.plist */,
 				2D75E2071CB49F4400704C3A /* Supporting Files */,
 			);
@@ -259,7 +271,6 @@
 			files = (
 				2D75E2401CB50A9000704C3A /* alarm.aif in Resources */,
 				2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */,
-				2D75E2441CB8B65900704C3A /* Settings.bundle in Resources */,
 				2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */,
 				2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */,
 			);
@@ -286,6 +297,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6444421CBB86620074BD8B /* SettingsController.m in Sources */,
+				2D75E2471CB9CB1E00704C3A /* Timer.m in Sources */,
+				2DC4BF861CBC6E2D00E56398 /* SettingsTimerEditController.m in Sources */,
 				2D75E20F1CB49F4800704C3A /* ViewController.m in Sources */,
 				2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */,
 				2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */,
@@ -517,6 +531,7 @@
 				2D75E2331CB49F5700704C3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2D75E2341CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +540,7 @@
 				2D75E2361CB49F5700704C3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2D75E2371CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveUITests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +549,7 @@
 				2D75E2391CB49F5700704C3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

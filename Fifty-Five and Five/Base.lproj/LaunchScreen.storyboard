@@ -23,7 +23,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1E-S1-9I8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="290"/>
-                                        <color key="backgroundColor" red="0.47450980390000003" green="0.33333333329999998" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upW-jI-qtU">
                                         <rect key="frame" x="0.0" y="290" width="600" height="290"/>
@@ -120,7 +120,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="AJ5-vF-tQB" secondAttribute="bottom" id="8aX-6F-Q0e"/>
                             <constraint firstItem="AJ5-vF-tQB" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="ZPU-5X-E8h"/>
