@@ -1,0 +1,14 @@
+To prepare Alarm Song.caf:
+
+Export uncompressed from GarageBand as "Alarm Song raw.aif"
+(The Logic version is unfinished.)
+
+(You could use Quicktime Player to trim it to < 30 seconds if needed, but
+I have the GarageBand source ending at 29.87s.)
+
+# Downmix to one channel.  You can't do this in the IMA4 conversion step
+# for some reason.
+afconvert Alarm\ Song\ raw.aif Alarm\ Song.wav -c 1 -d LEI16 --mix
+# Convert to IMA4 to decrease the file size.
+afconvert Alarm\ Song.wav Alarm\ Song.caf -d ima4 
+rm Alarm\ Song.wav Alarm\ Song\ raw.aif

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D215B141CBE053A0022A9E8 /* Alarm Ding.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D215B101CBE05100022A9E8 /* Alarm Ding.caf */; };
+		2D215B151CBE053A0022A9E8 /* Alarm Song.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2D215B131CBE05100022A9E8 /* Alarm Song.caf */; };
+		2D215B181CBE07B80022A9E8 /* AlarmSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D215B171CBE07B80022A9E8 /* AlarmSoundManager.m */; };
 		2D6444421CBB86620074BD8B /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D6444411CBB86620074BD8B /* SettingsController.m */; };
 		2D75E2091CB49F4500704C3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2081CB49F4500704C3A /* main.m */; };
 		2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E20B1CB49F4500704C3A /* AppDelegate.m */; };
@@ -14,23 +17,15 @@
 		2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2101CB49F4900704C3A /* Main.storyboard */; };
 		2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2131CB49F4C00704C3A /* Assets.xcassets */; };
 		2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */; };
-		2D75E2221CB49F5600704C3A /* Fifty_Five_and_FiveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */; };
-		2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */; };
 		2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E23B1CB4A59700704C3A /* TimerManager.m */; };
-		2D75E2401CB50A9000704C3A /* alarm.aif in Resources */ = {isa = PBXBuildFile; fileRef = 2D75E23F1CB50A9000704C3A /* alarm.aif */; };
 		2D75E2471CB9CB1E00704C3A /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D75E2461CB9CB1E00704C3A /* Timer.m */; };
+		2D80B0CB1CC30A58006E3CEF /* Fifty_Five_and_Five_Snapshots.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D80B0CA1CC30A58006E3CEF /* Fifty_Five_and_Five_Snapshots.m */; };
+		2D80B0DB1CC30E05006E3CEF /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D80B0DA1CC30E05006E3CEF /* SnapshotHelper.swift */; };
 		2DC4BF861CBC6E2D00E56398 /* SettingsTimerEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2D75E21E1CB49F5400704C3A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D75E1FC1CB49F2D00704C3A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D75E2031CB49F3100704C3A;
-			remoteInfo = "Fifty-Five and Five";
-		};
-		2D75E2291CB49F5600704C3A /* PBXContainerItemProxy */ = {
+		2D80B0CD1CC30A58006E3CEF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D75E1FC1CB49F2D00704C3A /* Project object */;
 			proxyType = 1;
@@ -40,6 +35,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D215B0F1CBE05100022A9E8 /* Alarm Song.README */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Alarm Song.README"; path = "Fifty-Five and Five/Alarm Song.README"; sourceTree = "<group>"; };
+		2D215B101CBE05100022A9E8 /* Alarm Ding.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alarm Ding.caf"; sourceTree = "<group>"; };
+		2D215B111CBE05100022A9E8 /* Alarm Ding.band */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Alarm Ding.band"; path = "Fifty-Five and Five/Alarm Ding.band"; sourceTree = "<group>"; };
+		2D215B121CBE05100022A9E8 /* Alarm Song.band */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Alarm Song.band"; path = "Fifty-Five and Five/Alarm Song.band"; sourceTree = "<group>"; };
+		2D215B131CBE05100022A9E8 /* Alarm Song.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Alarm Song.caf"; sourceTree = "<group>"; };
+		2D215B161CBE07B80022A9E8 /* AlarmSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmSoundManager.h; sourceTree = "<group>"; };
+		2D215B171CBE07B80022A9E8 /* AlarmSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmSoundManager.m; sourceTree = "<group>"; };
 		2D6444401CBB86620074BD8B /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		2D6444411CBB86620074BD8B /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fifty-Five and Five.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,18 +54,17 @@
 		2D75E2131CB49F4C00704C3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D75E2161CB49F4C00704C3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D75E2181CB49F4C00704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and FiveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_FiveTests.m; sourceTree = "<group>"; };
-		2D75E2231CB49F5600704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and FiveUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_FiveUITests.m; sourceTree = "<group>"; };
-		2D75E22E1CB49F5700704C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D75E23A1CB4A59700704C3A /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerManager.h; sourceTree = "<group>"; };
 		2D75E23B1CB4A59700704C3A /* TimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerManager.m; sourceTree = "<group>"; };
-		2D75E23F1CB50A9000704C3A /* alarm.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.aif; sourceTree = "<group>"; };
 		2D75E2411CB7B82E00704C3A /* icon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icon.svg; sourceTree = SOURCE_ROOT; };
 		2D75E2451CB9CB1E00704C3A /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		2D75E2461CB9CB1E00704C3A /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		2D80B0C81CC30A56006E3CEF /* Fifty-Five and Five Snapshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fifty-Five and Five Snapshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D80B0CA1CC30A58006E3CEF /* Fifty_Five_and_Five_Snapshots.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fifty_Five_and_Five_Snapshots.m; sourceTree = "<group>"; };
+		2D80B0CC1CC30A58006E3CEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D80B0D91CC30E00006E3CEF /* Fifty-Five and Five Snapshots-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fifty-Five and Five Snapshots-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D80B0DA1CC30E05006E3CEF /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		2D80B0DC1CC31454006E3CEF /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
 		2DC4BF841CBC6E2D00E56398 /* SettingsTimerEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTimerEditController.h; sourceTree = "<group>"; };
 		2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTimerEditController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,14 +77,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D75E21A1CB49F5400704C3A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D75E2251CB49F5600704C3A /* Frameworks */ = {
+		2D80B0C51CC30A56006E3CEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -96,9 +90,12 @@
 		2D75E1FB1CB49F2C00704C3A = {
 			isa = PBXGroup;
 			children = (
+				2D215B111CBE05100022A9E8 /* Alarm Ding.band */,
+				2D215B121CBE05100022A9E8 /* Alarm Song.band */,
+				2D215B0F1CBE05100022A9E8 /* Alarm Song.README */,
 				2D75E2061CB49F4400704C3A /* Fifty-Five and Five */,
-				2D75E2201CB49F5400704C3A /* Fifty-Five and FiveTests */,
-				2D75E22B1CB49F5600704C3A /* Fifty-Five and FiveUITests */,
+				2D80B0DC1CC31454006E3CEF /* Snapfile */,
+				2D80B0C91CC30A58006E3CEF /* Fifty-Five and Five Snapshots */,
 				2D75E2051CB49F3200704C3A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,8 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */,
-				2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */,
-				2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */,
+				2D80B0C81CC30A56006E3CEF /* Fifty-Five and Five Snapshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +116,8 @@
 				2D75E20B1CB49F4500704C3A /* AppDelegate.m */,
 				2D75E20D1CB49F4600704C3A /* ViewController.h */,
 				2D75E20E1CB49F4800704C3A /* ViewController.m */,
+				2D215B161CBE07B80022A9E8 /* AlarmSoundManager.h */,
+				2D215B171CBE07B80022A9E8 /* AlarmSoundManager.m */,
 				2D75E2451CB9CB1E00704C3A /* Timer.h */,
 				2D75E2461CB9CB1E00704C3A /* Timer.m */,
 				2D75E23A1CB4A59700704C3A /* TimerManager.h */,
@@ -128,8 +126,9 @@
 				2D6444411CBB86620074BD8B /* SettingsController.m */,
 				2DC4BF841CBC6E2D00E56398 /* SettingsTimerEditController.h */,
 				2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */,
-				2D75E23F1CB50A9000704C3A /* alarm.aif */,
 				2D75E2411CB7B82E00704C3A /* icon.svg */,
+				2D215B101CBE05100022A9E8 /* Alarm Ding.caf */,
+				2D215B131CBE05100022A9E8 /* Alarm Song.caf */,
 				2D75E2101CB49F4900704C3A /* Main.storyboard */,
 				2D75E2131CB49F4C00704C3A /* Assets.xcassets */,
 				2D75E2151CB49F4C00704C3A /* LaunchScreen.storyboard */,
@@ -147,22 +146,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2D75E2201CB49F5400704C3A /* Fifty-Five and FiveTests */ = {
+		2D80B0C91CC30A58006E3CEF /* Fifty-Five and Five Snapshots */ = {
 			isa = PBXGroup;
 			children = (
-				2D75E2211CB49F5600704C3A /* Fifty_Five_and_FiveTests.m */,
-				2D75E2231CB49F5600704C3A /* Info.plist */,
+				2D80B0CA1CC30A58006E3CEF /* Fifty_Five_and_Five_Snapshots.m */,
+				2D80B0DA1CC30E05006E3CEF /* SnapshotHelper.swift */,
+				2D80B0CC1CC30A58006E3CEF /* Info.plist */,
+				2D80B0D91CC30E00006E3CEF /* Fifty-Five and Five Snapshots-Bridging-Header.h */,
 			);
-			path = "Fifty-Five and FiveTests";
-			sourceTree = "<group>";
-		};
-		2D75E22B1CB49F5600704C3A /* Fifty-Five and FiveUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2D75E22C1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m */,
-				2D75E22E1CB49F5700704C3A /* Info.plist */,
-			);
-			path = "Fifty-Five and FiveUITests";
+			path = "Fifty-Five and Five Snapshots";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,40 +177,22 @@
 			productReference = 2D75E2041CB49F3200704C3A /* Fifty-Five and Five.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D75E21C1CB49F5400704C3A /* Fifty-Five and FiveTests */ = {
+		2D80B0C71CC30A56006E3CEF /* Fifty-Five and Five Snapshots */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D75E2341CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveTests" */;
+			buildConfigurationList = 2D80B0D11CC30A58006E3CEF /* Build configuration list for PBXNativeTarget "Fifty-Five and Five Snapshots" */;
 			buildPhases = (
-				2D75E2191CB49F5400704C3A /* Sources */,
-				2D75E21A1CB49F5400704C3A /* Frameworks */,
-				2D75E21B1CB49F5400704C3A /* Resources */,
+				2D80B0C41CC30A56006E3CEF /* Sources */,
+				2D80B0C51CC30A56006E3CEF /* Frameworks */,
+				2D80B0C61CC30A56006E3CEF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2D75E21F1CB49F5400704C3A /* PBXTargetDependency */,
+				2D80B0CE1CC30A58006E3CEF /* PBXTargetDependency */,
 			);
-			name = "Fifty-Five and FiveTests";
-			productName = "Fifty-Five and FiveTests";
-			productReference = 2D75E21D1CB49F5400704C3A /* Fifty-Five and FiveTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		2D75E2271CB49F5600704C3A /* Fifty-Five and FiveUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D75E2371CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveUITests" */;
-			buildPhases = (
-				2D75E2241CB49F5600704C3A /* Sources */,
-				2D75E2251CB49F5600704C3A /* Frameworks */,
-				2D75E2261CB49F5600704C3A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D75E22A1CB49F5600704C3A /* PBXTargetDependency */,
-			);
-			name = "Fifty-Five and FiveUITests";
-			productName = "Fifty-Five and FiveUITests";
-			productReference = 2D75E2281CB49F5600704C3A /* Fifty-Five and FiveUITests.xctest */;
+			name = "Fifty-Five and Five Snapshots";
+			productName = "Fifty-Five and Five Snapshots";
+			productReference = 2D80B0C81CC30A56006E3CEF /* Fifty-Five and Five Snapshots.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -234,11 +208,7 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 5LB36Z8G8T;
 					};
-					2D75E21C1CB49F5400704C3A = {
-						CreatedOnToolsVersion = 7.3;
-						TestTargetID = 2D75E2031CB49F3100704C3A;
-					};
-					2D75E2271CB49F5600704C3A = {
+					2D80B0C71CC30A56006E3CEF = {
 						CreatedOnToolsVersion = 7.3;
 						TestTargetID = 2D75E2031CB49F3100704C3A;
 					};
@@ -258,8 +228,7 @@
 			projectRoot = "";
 			targets = (
 				2D75E2031CB49F3100704C3A /* Fifty-Five and Five */,
-				2D75E21C1CB49F5400704C3A /* Fifty-Five and FiveTests */,
-				2D75E2271CB49F5600704C3A /* Fifty-Five and FiveUITests */,
+				2D80B0C71CC30A56006E3CEF /* Fifty-Five and Five Snapshots */,
 			);
 		};
 /* End PBXProject section */
@@ -269,21 +238,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D75E2401CB50A9000704C3A /* alarm.aif in Resources */,
-				2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */,
 				2D75E2141CB49F4C00704C3A /* Assets.xcassets in Resources */,
+				2D75E2171CB49F4C00704C3A /* LaunchScreen.storyboard in Resources */,
 				2D75E2121CB49F4900704C3A /* Main.storyboard in Resources */,
+				2D215B141CBE053A0022A9E8 /* Alarm Ding.caf in Resources */,
+				2D215B151CBE053A0022A9E8 /* Alarm Song.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D75E21B1CB49F5400704C3A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D75E2261CB49F5600704C3A /* Resources */ = {
+		2D80B0C61CC30A56006E3CEF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -304,37 +267,26 @@
 				2D75E23C1CB4A59700704C3A /* TimerManager.m in Sources */,
 				2D75E20C1CB49F4500704C3A /* AppDelegate.m in Sources */,
 				2D75E2091CB49F4500704C3A /* main.m in Sources */,
+				2D215B181CBE07B80022A9E8 /* AlarmSoundManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2D75E2191CB49F5400704C3A /* Sources */ = {
+		2D80B0C41CC30A56006E3CEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D75E2221CB49F5600704C3A /* Fifty_Five_and_FiveTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D75E2241CB49F5600704C3A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D75E22D1CB49F5600704C3A /* Fifty_Five_and_FiveUITests.m in Sources */,
+				2D80B0CB1CC30A58006E3CEF /* Fifty_Five_and_Five_Snapshots.m in Sources */,
+				2D80B0DB1CC30E05006E3CEF /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2D75E21F1CB49F5400704C3A /* PBXTargetDependency */ = {
+		2D80B0CE1CC30A58006E3CEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2D75E2031CB49F3100704C3A /* Fifty-Five and Five */;
-			targetProxy = 2D75E21E1CB49F5400704C3A /* PBXContainerItemProxy */;
-		};
-		2D75E22A1CB49F5600704C3A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2D75E2031CB49F3100704C3A /* Fifty-Five and Five */;
-			targetProxy = 2D75E2291CB49F5600704C3A /* PBXContainerItemProxy */;
+			targetProxy = 2D80B0CD1CC30A58006E3CEF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -448,6 +400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Fifty-Five and Five/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.fifty-five-and-five";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -460,54 +413,36 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Fifty-Five and Five/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.fifty-five-and-five";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		2D75E2351CB49F5700704C3A /* Debug */ = {
+		2D80B0CF1CC30A58006E3CEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Fifty-Five and FiveTests/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "Fifty-Five and Five Snapshots/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-Five-Snapshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fifty-Five and Five.app/Fifty-Five and Five";
-			};
-			name = Debug;
-		};
-		2D75E2361CB49F5700704C3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Fifty-Five and FiveTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fifty-Five and Five.app/Fifty-Five and Five";
-			};
-			name = Release;
-		};
-		2D75E2381CB49F5700704C3A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Fifty-Five and FiveUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fifty-Five and Five Snapshots/Fifty-Five and Five Snapshots-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = "Fifty-Five and Five";
 			};
 			name = Debug;
 		};
-		2D75E2391CB49F5700704C3A /* Release */ = {
+		2D80B0D01CC30A58006E3CEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "Fifty-Five and FiveUITests/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "Fifty-Five and Five Snapshots/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-FiveUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.piquan.Fifty-Five-and-Five-Snapshots";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fifty-Five and Five Snapshots/Fifty-Five and Five Snapshots-Bridging-Header.h";
 				TEST_TARGET_NAME = "Fifty-Five and Five";
 			};
 			name = Release;
@@ -533,20 +468,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D75E2341CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveTests" */ = {
+		2D80B0D11CC30A58006E3CEF /* Build configuration list for PBXNativeTarget "Fifty-Five and Five Snapshots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2D75E2351CB49F5700704C3A /* Debug */,
-				2D75E2361CB49F5700704C3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D75E2371CB49F5700704C3A /* Build configuration list for PBXNativeTarget "Fifty-Five and FiveUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D75E2381CB49F5700704C3A /* Debug */,
-				2D75E2391CB49F5700704C3A /* Release */,
+				2D80B0CF1CC30A58006E3CEF /* Debug */,
+				2D80B0D01CC30A58006E3CEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

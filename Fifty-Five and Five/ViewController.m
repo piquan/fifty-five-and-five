@@ -49,7 +49,10 @@
     [self updateTimerDisplay];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSString *,id> *)change
+                       context:(void *)context
 {
     if ([keyPath isEqualToString:@"runningTimer"])
         [self updateRunningTimer];
@@ -79,6 +82,11 @@
     [super viewDidDisappear:animated];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)prepareForSnapshot:(NSNotification *)notification
 {
     // This is also where we prepare for the snapshot when we go to the background.  (Yes, here, not in applicationWillEnterBackground:, according to https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/StrategiesforHandlingAppStateTransitions/StrategiesforHandlingAppStateTransitions.html#//apple_ref/doc/uid/TP40007072-CH8-SW27 )
@@ -96,21 +104,33 @@
 }
 - (IBAction)stopTimer:(id)sender
 {
-    [[TimerManager sharedInstance] stopTimer];
+    TimerManager *tm = [TimerManager sharedInstance];
+    if (tm.runningTimer)
+        [tm stopTimer];
+    else
+        [tm startNextTimer];
 }
 
 - (void)updateRunningTimer
 {
     Timer * timer = [TimerManager sharedInstance].runningTimer;
+    NSLog(@"Updating screen for %@", timer.name);
     UIColor * color;
     if (timer) {
         self.whichTimerLabel.text = [[timer name] capitalizedStringWithLocale:[NSLocale currentLocale]];
         color = [timer color];
+        [_stopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
+        _continueButton.enabled = YES;
+        [_continueButton setTitle:[[TimerManager sharedInstance] nextTimer].name forState:UIControlStateNormal];
+        _snoozeButton.enabled = YES;
     } else {
         self.whichTimerLabel.text = NSLocalizedString(@"Stopped", nil);
         color = [UIColor darkGrayColor];
+        [_stopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
+        _continueButton.enabled = NO;
+        _snoozeButton.enabled = NO;
     }
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.coloringView.backgroundColor = color;
     }];
 }
@@ -174,6 +194,7 @@
 
 - (IBAction)doneWithSettings:(UIStoryboardSegue*)unwindSegue
 {
+    // This method intentionally left blank.
 }
 
 @end

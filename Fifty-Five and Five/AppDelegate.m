@@ -20,24 +20,24 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // FIXME If we're launching in response to a notification, handle it.
-    // FIXME Handle actions.
+    // FIXME Is there anything we need to do in response to a notification here?
     
     // If you change these, be sure to also change the actions in TimerManager.m.
     UIMutableUserNotificationAction * snoozeAction = [[UIMutableUserNotificationAction alloc] init];
     snoozeAction.identifier = @"snooze";
     snoozeAction.title = NSLocalizedString(@"Snooze", nil);
+    snoozeAction.authenticationRequired = NO;
     snoozeAction.activationMode = UIUserNotificationActivationModeBackground;
     UIMutableUserNotificationAction * stopAction = [[UIMutableUserNotificationAction alloc] init];
     stopAction.identifier = @"stop";
     stopAction.title = NSLocalizedString(@"Stop", nil);
     stopAction.destructive = YES;
-    stopAction.activationMode = UIUserNotificationActivationModeBackground;
+    stopAction.activationMode = UIUserNotificationActivationModeForeground;
     
     UIMutableUserNotificationCategory * alarmCategory = [[UIMutableUserNotificationCategory alloc] init];
     alarmCategory.identifier = @"alarm";
     [alarmCategory setActions:@[stopAction, snoozeAction] forContext:UIUserNotificationActionContextDefault];
-    [alarmCategory setActions:@[snoozeAction] forContext:UIUserNotificationActionContextMinimal];
+    [alarmCategory setActions:@[stopAction, snoozeAction] forContext:UIUserNotificationActionContextMinimal];
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:[NSSet setWithObject:alarmCategory]]];
     

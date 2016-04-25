@@ -13,6 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIView * coloringView;
 @property (weak, nonatomic) IBOutlet UILabel * whichTimerLabel;
 @property (weak, nonatomic) IBOutlet UILabel * timeRemainingLabel;
+@property (weak, nonatomic) IBOutlet UIButton * stopButton;
+@property (weak, nonatomic) IBOutlet UIButton * continueButton;
+@property (weak, nonatomic) IBOutlet UIButton * snoozeButton;
 
 - (IBAction)startNextTimer:(id)sender;
 - (IBAction)fiveMoreMinutes:(id)sender;

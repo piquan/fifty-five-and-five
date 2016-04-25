@@ -20,6 +20,9 @@
 + (TimerManager * _Nonnull)sharedInstance;
 - (void)save;
 
+- (Timer * _Nonnull)nextTimer;
+- (void)updateColors; // FIXME This shouldn't be called; it should be updated automatically with KVO.
+
 - (void)resignActive;
 - (void)becomeActive;
 - (void)enterForeground;
@@ -35,6 +38,7 @@
 
 - (Timer * _Nullable)timerForIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (NSString * _Nonnull)stringForTimerInterval:(Timer * _Nonnull)timer;
+- (NSTimeInterval)timerIntervalForString:(NSString * _Nonnull)string;
 
 // These are usually implemented as part of UITableViewDelegate, but SettingsController will
 // defer them to us just like it does the UITableViewDataSource methods.

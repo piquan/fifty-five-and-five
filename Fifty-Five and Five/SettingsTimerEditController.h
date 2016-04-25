@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Timer.h"
 
-@interface SettingsTimerEditController : UITableViewController
+@interface SettingsTimerEditController : UITableViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property IBOutlet UITextField * nameField;
 @property IBOutlet UITextField * intervalField;
-@property IBOutlet UIDatePicker * datePicker;
-@property IBOutlet UIToolbar * datePickerAccessoryView;
+@property IBOutlet UIPickerView * timePicker;
+@property IBOutlet UIToolbar * timePickerAccessoryView;
 
 @property Timer * timer;
 

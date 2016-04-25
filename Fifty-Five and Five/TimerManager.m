@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AVFoundation/AVFoundation.h>
+#import "AlarmSoundManager.h"
 #import "AppDelegate.h"
 #import "TimerManager.h"
 
 @implementation TimerManager {
-    AVAudioPlayer * _Nullable playingAlarm;
     NSDateComponentsFormatter * _Nonnull timerFormatter;
+    UIAlertController * _Nullable presentingAlert;
 }
 
 static NSString * kTimers = @"timers";
@@ -37,7 +37,13 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     static TimerManager * rv;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        rv = [NSKeyedUnarchiver unarchiveObjectWithFile:[self modelPath]];
+        rv = nil;
+#if TARGET_OS_SIMULATOR
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"resetDataStore"])
+#endif
+        {
+            rv = [NSKeyedUnarchiver unarchiveObjectWithFile:[self modelPath]];
+        }
         if (!rv)
             rv = [[TimerManager alloc] init];
     });
@@ -62,18 +68,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
         _runningTimer = runningTimer;
         _nextAlarm = nextAlarm;
         [self updateColors];
-
-        if (nextAlarm) {
-            NSDate * now = [NSDate date];
-            NSUInteger offset = 0;
-            while ([nextAlarm compare:now] != NSOrderedDescending) {
-                offset++;
-                runningTimer = [self timerAtOffset:offset];
-                nextAlarm = [nextAlarm dateByAddingTimeInterval:runningTimer.interval];
-            }
-            _runningTimer = runningTimer;
-            _nextAlarm = nextAlarm;
-        }
+        [self normalizeNextAlarm];
         
         [self setupNotifications];
     }
@@ -83,15 +78,46 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 - (id)init
 {
     NSLog(@"Initializing data store");
-    Timer *timer55 = [[Timer alloc] initWithName:NSLocalizedString(@"Work", nil)
-                                        interval:55 * 60];
-    Timer *timer5 =  [[Timer alloc] initWithName:NSLocalizedString(@"Rest", nil)
-                                        interval:5 * 60];
     
-    return [self initWithTimers:[NSOrderedSet orderedSetWithObjects:timer55, timer5, nil]
-                   runningTimer:nil
-                      nextAlarm:nil
-                 snoozeInterval:5 * 60];
+#if TARGET_OS_SIMULATOR
+    NSString *demoTimerSet = [[NSUserDefaults standardUserDefaults] stringForKey:@"demoTimerSet"];
+    if ([demoTimerSet isEqualToString:@"intervalTraining"]) {
+        Timer *run =    [[Timer alloc] initWithName:NSLocalizedString(@"Run", nil)
+                                           interval:20];
+        Timer *sprint = [[Timer alloc] initWithName:NSLocalizedString(@"Sprint", nil)
+                                           interval:10];
+        Timer *recover =[[Timer alloc] initWithName:NSLocalizedString(@"Recover", nil)
+                                           interval:30];
+        
+        return [self initWithTimers:[NSOrderedSet orderedSetWithObjects:run, sprint, recover, nil]
+                       runningTimer:nil
+                          nextAlarm:nil
+                     snoozeInterval:5 * 60];
+        
+    } else if ([demoTimerSet isEqualToString:@"shortWork"]) {
+        Timer *timer55 = [[Timer alloc] initWithName:NSLocalizedString(@"Work", nil)
+                                            interval:5];
+        Timer *timer5 =  [[Timer alloc] initWithName:NSLocalizedString(@"Rest", nil)
+                                            interval:5 * 60];
+        
+        return [self initWithTimers:[NSOrderedSet orderedSetWithObjects:timer55, timer5, nil]
+                       runningTimer:nil
+                          nextAlarm:nil
+                     snoozeInterval:5 * 60];
+        
+    } else
+#endif
+    {
+        Timer *timer55 = [[Timer alloc] initWithName:NSLocalizedString(@"Work", nil)
+                                            interval:55 * 60];
+        Timer *timer5 =  [[Timer alloc] initWithName:NSLocalizedString(@"Rest", nil)
+                                            interval:5 * 60];
+        
+        return [self initWithTimers:[NSOrderedSet orderedSetWithObjects:timer55, timer5, nil]
+                       runningTimer:nil
+                          nextAlarm:nil
+                     snoozeInterval:5 * 60];
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -124,13 +150,20 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     }
 }
 
-- (AVAudioPlayer*)newPlayingAlarm
+- (void)normalizeNextAlarm
 {
-    NSURL * alarmUrl = [[NSBundle mainBundle] URLForResource:@"alarm"
-                                               withExtension:@"aif"];
-    return [[AVAudioPlayer alloc] initWithContentsOfURL:alarmUrl
-                                   fileTypeHint:AVFileTypeAIFF
-                                          error:nil];
+    if (_nextAlarm) {
+        NSDate * nextAlarm = _nextAlarm;
+        Timer * runningTimer = _runningTimer;
+        NSDate * now = [NSDate date];
+        NSUInteger offset = 0;
+        while ([nextAlarm compare:now] != NSOrderedDescending) {
+            offset++;
+            runningTimer = [self timerAtOffset:offset];
+            nextAlarm = [nextAlarm dateByAddingTimeInterval:runningTimer.interval];
+        }
+        [self switchToTimer:runningTimer forAlarmTime:nextAlarm];
+    }
 }
 
 - (void)updateColors
@@ -155,11 +188,11 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
             idx >>= 1;
         }
         // The offset is to make the first few colors a little more aesthetically pleasing;
-        // a 0.0 hue is solid red, which can be jarring.
+        // a 0.0 hue is red, which can be jarring.
         CGFloat hue = (((float)hueInt) / timerCountRoundedUp) + 0.8;
         if (hue > 1.0)
             hue -= 1.0;
-        timer.color = [UIColor colorWithHue:hue saturation:1.0 brightness:1.0 alpha:1.0];
+        timer.color = [UIColor colorWithHue:hue saturation:1.0 brightness:0.667 alpha:1.0];
     }];
 }
 
@@ -176,6 +209,29 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 - (NSString*)stringForTimerInterval:(Timer *)timer
 {
     return [timerFormatter stringFromTimeInterval:timer.interval];
+}
+
+- (NSTimeInterval)timerIntervalForString:(NSString * _Nonnull)string
+{
+    static NSPredicate * stringIsEmpty;
+    static NSCharacterSet * nonnumbers;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        stringIsEmpty = [NSPredicate predicateWithFormat:@"SELF != ''"];
+        NSRange numberRange;
+        numberRange.location = '0';
+        numberRange.length = 10;
+        nonnumbers = [[NSCharacterSet characterSetWithRange:numberRange] invertedSet];
+    });
+    NSString * trimmed = [string stringByTrimmingCharactersInSet:nonnumbers];
+    NSArray<NSString*>* components = [trimmed componentsSeparatedByCharactersInSet:nonnumbers];
+    NSArray<NSString*>* contiguousComponents = [components filteredArrayUsingPredicate:stringIsEmpty];
+    
+    NSUInteger rv = 0;
+    for (NSString* component in contiguousComponents) {
+        rv = rv * 60 + [component integerValue];
+    }
+    return (NSTimeInterval)rv;
 }
 
 #pragma mark - runningTimer and nextAlarm
@@ -212,8 +268,8 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     _nextAlarm = [_nextAlarm dateByAddingTimeInterval:interval];
     [self didChangeValueForKey:@"nextAlarm"];
 
-    [self save];
     [self setupNotifications];
+    [self save];
 }
 
 - (void)switchToTimer:(Timer * _Nonnull)timer
@@ -286,7 +342,9 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 
     UILocalNotification * notificationTemplate = [[UILocalNotification alloc] init];
     notificationTemplate.category = @"alarm";
-    notificationTemplate.soundName = @"alarm.aif";
+    notificationTemplate.soundName = [[[AlarmSoundManager sharedInstance] currentAlarm] filename];
+    //notificationTemplate.alertAction = NSLocalizedString(@"View", nil);
+    notificationTemplate.hasAction = NO;
     
     NSUInteger notificationCount;
     if (repeatInterval != NSCalendarUnitEra) {
@@ -296,24 +354,28 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
         notificationCount = 64;
     }
     
-    NSDate * offsetDate = nextAlarm;
-    for (int offset = 0; offset < notificationCount; offset++) {
+    NSDate * nextNotificationTime = nextAlarm;
+    // We start with offset 1, since what we're getting is the "Time to Foo" message from
+    // the timer after the one ringing, and adding the expiration time from that timer too.
+    // We don't actually need anything from the timer at offset 0.
+    for (int offset = 1; offset < notificationCount + 1; offset++) {
         UILocalNotification * notification = [notificationTemplate copy];
-        Timer * offsetTimer = [self timerAtOffset:offset];
-        notification.fireDate = offsetDate;
-        notification.alertBody = [[self timerAtOffset:offset + 1] callToAction];
+        notification.fireDate = nextNotificationTime;
+        Timer * nextTimer = [self timerAtOffset:offset];
+        notification.alertBody = [nextTimer callToAction];
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-        NSLog(@"Scheduled notification with offset %i: %@", offset, notification);
-        offsetDate = [NSDate dateWithTimeInterval:offsetTimer.interval sinceDate:offsetDate];
+        nextNotificationTime = [NSDate dateWithTimeInterval:nextTimer.interval sinceDate:nextNotificationTime];
+        //NSLog(@"Scheduled notification %i: %@: %@", offset, nextTimer.name, notification);
     }
 }
 
 - (void)alarmFired
 {
-    if (playingAlarm) {
-        [playingAlarm stop];
-    } else {
-        playingAlarm = [self newPlayingAlarm];
+    AlarmSoundManager * sm = [AlarmSoundManager sharedInstance];
+    [sm stopAll];
+    [self switchToNextTimer];
+    if (presentingAlert) {
+        [presentingAlert.parentViewController dismissViewControllerAnimated:NO completion:nil];
     }
     
     NSString * appName = [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
@@ -321,27 +383,30 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
                                                                    message:[self.runningTimer callToAction]
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
+    presentingAlert = alert;
+    
+    AlarmSound * alarm = [sm currentAlarm];
     UIAlertAction* stopAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Stop", nil)
                                                          style:UIAlertActionStyleDestructive
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           [playingAlarm stop];
-                                                           playingAlarm = nil;
+                                                           [alarm stop];
+                                                           presentingAlert = nil;
                                                            [self stopTimer];
                                                        }];
     [alert addAction:stopAction];
     UIAlertAction* snoozeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Snooze", nil)
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {
-                                                             [playingAlarm stop];
-                                                             playingAlarm = nil;
+                                                             [alarm stop];
+                                                             presentingAlert = nil;
                                                              [self snooze];
                                                          }];
     [alert addAction:snoozeAction];
     UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
                                                           style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-                                                            [playingAlarm stop];
-                                                            playingAlarm = nil;
+                                                            [alarm stop];
+                                                            presentingAlert = nil;
                                                         }];
     [alert addAction:closeAction];
 
@@ -349,44 +414,33 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     [appDelegate.window.rootViewController presentViewController:alert
                                                         animated:YES
                                                       completion:^{
-                                                          [self switchToNextTimer];
-                                                          [playingAlarm play];
+                                                          [alarm alarm];
                                                       }];
 }
 
 - (void)alarmAcknowledged
 {
-    if (playingAlarm && playingAlarm.playing) {
-        [playingAlarm stop];
-        playingAlarm = nil;
-    }
+    [[AlarmSoundManager sharedInstance] stopAll];
 }
 
 #pragma mark - App state changes
 
 - (void)resignActive
 {
-    if (playingAlarm)
-        [playingAlarm stop];
+    [[AlarmSoundManager sharedInstance] stopAll];
 }
 - (void)becomeActive
 {
-    if (playingAlarm)
-        [playingAlarm play];
+    [self normalizeNextAlarm];
 }
 - (void)enterForeground
 {
-    if (playingAlarm) {
-        [playingAlarm stop];
-        playingAlarm = nil;
-    }
+    [self normalizeNextAlarm];
+    [[AlarmSoundManager sharedInstance] stopAll];
 }
 - (void)enterBackground
 {
-    if (playingAlarm) {
-        [playingAlarm stop];
-        playingAlarm = nil;
-    }
+    [[AlarmSoundManager sharedInstance] stopAll];
 }
 
 #pragma mark - User inputs
@@ -398,9 +452,9 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 
 - (void)snooze
 {
-    [playingAlarm stop];
-    playingAlarm = nil;
-    [self switchToNextTimerForInterval:self.snoozeInterval];
+    // By the time the user asks to snooze, we've already processed the timer advance.
+    [[AlarmSoundManager sharedInstance] stopAll];
+    [self switchToTimer:[self timerAtOffset:-1] forInterval:self.snoozeInterval];
 }
 
 - (void)fiveMoreMinutes
@@ -409,13 +463,6 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
         [self switchToTimer:[self timerAtOffset:-1] forInterval:self.snoozeInterval];
         return;
     }
-    
-    if (playingAlarm) {
-        // This shouldn't happen.
-        [self snooze];
-        return;
-    }
-    
     [self addInterval:self.snoozeInterval];
 }
 
@@ -448,8 +495,6 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Timer * timer = [self timerForIndexPath:indexPath];
-    NSLog(@"Configuring cell for %@", timer.name);
-
     if (timer == nil) {
         return [tableView dequeueReusableCellWithIdentifier:@"timerInsert" forIndexPath:indexPath];
     }
@@ -461,11 +506,15 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_timers.count == 1 && indexPath.row == 0)
-        return NO;
-    return YES;
+    BOOL rv;
+    if (_timers.count == 1 && indexPath.row == 0) {
+        rv = NO;
+    } else {
+        rv = YES;
+    }
+    return rv;
 }
-    
+
 - (void)tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -475,6 +524,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [self save];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        // The settings controller should have handled this.
+        abort();
     }
 }
 

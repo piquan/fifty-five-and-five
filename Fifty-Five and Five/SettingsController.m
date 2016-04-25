@@ -8,6 +8,7 @@
 
 #import "SettingsController.h"
 #import "SettingsTimerEditController.h"
+#import "AlarmSoundManager.h"
 #import "TimerManager.h"
 
 @interface SettingsController ()
@@ -36,18 +37,39 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[TimerManager sharedInstance] numberOfSectionsInTableView:tableView] + 0;
+    return [[TimerManager sharedInstance] numberOfSectionsInTableView:tableView] + 1;
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+        return NSLocalizedString(@"Timers", nil);
+    else if (section == 1)
+        return NSLocalizedString(@"Alert Sound", nil);
+    else
+        abort();
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0)
         return [[TimerManager sharedInstance] tableView:tableView numberOfRowsInSection:section];
+    else if (section == 1)
+        return 2;
     abort();
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0)
+    if (indexPath.section == 0) {
         return [[TimerManager sharedInstance] tableView:tableView cellForRowAtIndexPath:indexPath];
+    } else if (indexPath.section == 1) {
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"sound" forIndexPath:indexPath];
+        AlarmSoundManager *sm = [AlarmSoundManager sharedInstance];
+        cell.textLabel.text = [sm.alarmSounds objectAtIndex:indexPath.row].localizedName;
+        if ([AlarmSoundManager sharedInstance].currentAlarmSoundIdx == indexPath.row) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        return cell;
+    }
     abort();
 }
 
@@ -61,21 +83,17 @@
 - (void)tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self addTimer:tableView];
+        return;
+    } else if (indexPath.section == 0) {
         [[TimerManager sharedInstance] tableView:tableView
                               commitEditingStyle:editingStyle
                                forRowAtIndexPath:indexPath];
         return;
+    } else {
+        abort();
     }
-    abort();
-#if 0
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-#endif
 }
 
 // Override to support rearranging the table view.
@@ -124,12 +142,11 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     BOOL wasEditing = self.tableView.editing;
-    // Invoke the superclass first, since we'll
+    // Invoke the superclass first, since we'll be changing the row count, and if we do that before setting
+    // the edited attribute then the tableView will throw an exception about a mismatch in the number of
+    // rows in the table.
     [super setEditing:editing animated:animated];
     
-    NSLog(@"editing: %i; wasEditing: %i; now editing: %i; row count: %li timer count: %lu",
-          editing, wasEditing, self.tableView.editing,
-          (long)[self.tableView numberOfRowsInSection:0], (unsigned long)[TimerManager sharedInstance].timers.count);
     if (editing && !wasEditing) {
         [self.tableView beginUpdates];
         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[TimerManager sharedInstance].timers.count
@@ -154,6 +171,18 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
         selectedTimer = [[TimerManager sharedInstance] timerForIndexPath:indexPath];
         if (selectedTimer)
             return indexPath;
+        else
+            return nil;
+    } else if (indexPath.section == 1) {
+        AlarmSoundManager * alarmMgr = [AlarmSoundManager sharedInstance];
+        UITableViewCell * oldCell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:alarmMgr.currentAlarmSoundIdx inSection:1]];
+        oldCell.accessoryType = UITableViewCellAccessoryNone;
+        [alarmMgr stopAll];
+        alarmMgr.currentAlarmSoundIdx = indexPath.row;
+        [alarmMgr.currentAlarm play];
+        UITableViewCell * newCell = [tableView cellForRowAtIndexPath:indexPath];
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        return indexPath;
     }
     return nil;
 }
@@ -172,11 +201,18 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
     [self.tableView reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[AlarmSoundManager sharedInstance] stopAll];
+    [super viewWillDisappear:animated];
+}
+
 - (IBAction)addTimer:(id)sender
 {
     Timer * newTimer = [[Timer alloc] initWithName:NSLocalizedString(@"New Timer", nil)
                                           interval:5 * 60];
     [[TimerManager sharedInstance].timers addObject:newTimer];
+    [[TimerManager sharedInstance] updateColors];
     selectedTimer = newTimer;
     [self performSegueWithIdentifier:@"editTimer" sender:self];
 }
