@@ -1,0 +1,27 @@
+This file is a friendly reminder about the GPL.  It is not a license,
+or legal advice.
+
+Fifty-Five and Five is largely covered by the GPL version 3.  You are
+permitted to copy, modify, and distribute it, under the terms of the
+GPL.  However, you are not permitted to submit this program to the
+Apple App Store.  You also are not permitted to modify it or
+incorporate parts into your program, if your program is going to be
+submitted to the App Store.
+
+This is not a desirable situation: I want you to be able to submit a
+modified open-source program to the App Store, as long as you also
+share your source code under similar terms.  I just haven't yet
+written the legal documents to make that happen.
+
+Until then, if you want to use fork my program, or use part of it in
+your open-source program, then send me a message.  I can grant
+exceptions on a case-by-case basis.
+
+If you want to contribute changes to Fifty-Five and Five, thank you!
+I've granted Apple a special license to distribute binaries of my
+program under their usual terms.  I have the legal option to do that,
+because all of Fifty-Five and Five is my original work.  In order to
+retain that option, I have to hold copyright on all its code.  If you
+submit a pull request with a substantial amount of code, I may ask you
+to send a copyright assignment so that I can continue to grant that
+exception, and exceptions for other open-source projects if needed.
