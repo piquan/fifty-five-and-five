@@ -261,6 +261,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 {
     // We do this here instead of in the view controller, since I'm not sure if the view controller can be freed while we're in the background.
     [[UIApplication sharedApplication] ignoreSnapshotOnNextApplicationLaunch];
+    NSLog(@"Switching to timer %@ for alarm time %@", [timer name], [NSDateFormatter localizedStringFromDate:alarmTime dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterLongStyle]);
     
     [self willChangeValueForKey:@"runningTimer"];
     [self willChangeValueForKey:@"nextAlarm"];
@@ -278,6 +279,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     [self willChangeValueForKey:@"nextAlarm"];
     _nextAlarm = [_nextAlarm dateByAddingTimeInterval:interval];
     [self didChangeValueForKey:@"nextAlarm"];
+    NSLog(@"Updating to alarm time %@", [NSDateFormatter localizedStringFromDate:_nextAlarm dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterLongStyle]);
 
     [self setupNotifications];
     [self save];
@@ -354,8 +356,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     UILocalNotification * notificationTemplate = [[UILocalNotification alloc] init];
     notificationTemplate.category = @"alarm";
     notificationTemplate.soundName = [[[AlarmSoundManager sharedInstance] currentAlarm] filename];
-    //notificationTemplate.alertAction = NSLocalizedString(@"View", nil);
-    notificationTemplate.hasAction = NO;
+    notificationTemplate.alertAction = NSLocalizedString(@"Show Timer", nil);
     
     NSUInteger notificationCount;
     if (repeatInterval != NSCalendarUnitEra) {
@@ -366,7 +367,7 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     }
     
     NSDate * nextNotificationTime = nextAlarm;
-    // We start with offset 1, since what we're getting is the "Time to Foo" message from
+    // We start with offset 1, since what we're getting is the "Time for Foo" message from
     // the timer after the one ringing, and adding the expiration time from that timer too.
     // We don't actually need anything from the timer at offset 0.
     for (int offset = 1; offset < notificationCount + 1; offset++) {
@@ -392,12 +393,12 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
     NSString * appName = [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:(NSString *)kCFBundleNameKey];
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:appName
                                                                    message:[self.runningTimer callToAction]
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     
     presentingAlert = alert;
     
     AlarmSound * alarm = [sm currentAlarm];
-    UIAlertAction* stopAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Stop", nil)
+    UIAlertAction* stopAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Stop Timers", nil)
                                                          style:UIAlertActionStyleDestructive
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            [alarm stop];
@@ -413,8 +414,10 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
                                                              [self snooze];
                                                          }];
     [alert addAction:snoozeAction];
+    // We call this "Close" because Alert-style UILocalNotifications always have a "Close" action.
+    // It's UIAlertActionStyleCancel, which is the same as a local notification's "Close" button.
     UIAlertAction* closeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
-                                                          style:UIAlertActionStyleDefault
+                                                          style:UIAlertActionStyleCancel
                                                         handler:^(UIAlertAction * action) {
                                                             [alarm stop];
                                                             presentingAlert = nil;

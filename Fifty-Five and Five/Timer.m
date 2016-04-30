@@ -50,7 +50,9 @@ static NSString * kInterval = @"interval";
 
 - (NSString*)callToAction
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"Time to %@", nil), self.name];
+    // We use "for" instead of "to" (in English) to handle the case where the timer name is a verb or a noun.
+    // How well will this work in other languages?
+    return [NSString stringWithFormat:NSLocalizedString(@"Time for %@", nil), self.name];
 }
 
 @end

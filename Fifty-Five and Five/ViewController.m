@@ -130,14 +130,14 @@
     if (timer) {
         self.whichTimerLabel.text = [[timer name] capitalizedStringWithLocale:[NSLocale currentLocale]];
         color = [timer color];
-        [_stopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
+        [_stopButton setTitle:NSLocalizedString(@"Stop Timers", nil) forState:UIControlStateNormal];
         _continueButton.enabled = YES;
         [_continueButton setTitle:[[TimerManager sharedInstance] nextTimer].name forState:UIControlStateNormal];
         _snoozeButton.enabled = YES;
     } else {
         self.whichTimerLabel.text = NSLocalizedString(@"Stopped", nil);
         color = [UIColor darkGrayColor];
-        [_stopButton setTitle:NSLocalizedString(@"Start", nil) forState:UIControlStateNormal];
+        [_stopButton setTitle:NSLocalizedString(@"Start Timers", nil) forState:UIControlStateNormal];
         _continueButton.enabled = NO;
         _snoozeButton.enabled = NO;
     }

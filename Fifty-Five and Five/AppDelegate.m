@@ -41,7 +41,7 @@
     snoozeAction.activationMode = UIUserNotificationActivationModeBackground;
     UIMutableUserNotificationAction * stopAction = [[UIMutableUserNotificationAction alloc] init];
     stopAction.identifier = @"stop";
-    stopAction.title = NSLocalizedString(@"Stop", nil);
+    stopAction.title = NSLocalizedString(@"Stop Timers", nil);
     stopAction.destructive = YES;
     stopAction.activationMode = UIUserNotificationActivationModeForeground;
     
