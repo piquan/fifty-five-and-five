@@ -463,8 +463,10 @@ static NSString * kSnoozeInterval = @"snoozeInterval";
 
 - (void)snooze
 {
-    // By the time the user asks to snooze, we've already processed the timer advance.
     [[AlarmSoundManager sharedInstance] stopAll];
+    // Make sure we've advanced to the next alarm before we process this request.  If we were suspended, we might
+    // not have been normalized yet.
+    [self normalizeNextAlarm];
     [self switchToTimer:[self timerAtOffset:-1] forInterval:self.snoozeInterval];
 }
 
