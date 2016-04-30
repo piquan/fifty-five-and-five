@@ -1,3 +1,12 @@
+The sound files (Alarm Ding and Alarm Song) are original compositions
+Copyright (C) 2016 Joel Ray Holveck.
+
+This compositions are licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International License. To view a copy of
+this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+
+COMPILING INSTRUCTIONS:
+
 To prepare Alarm Song.caf:
 
 Export uncompressed from GarageBand as "Alarm Song raw.aif"
@@ -10,5 +19,5 @@ I have the GarageBand source ending at 29.87s.)
 # for some reason.
 afconvert Alarm\ Song\ raw.aif Alarm\ Song.wav -c 1 -d LEI16 --mix
 # Convert to IMA4 to decrease the file size.
-afconvert Alarm\ Song.wav Alarm\ Song.caf -d ima4 
+afconvert Alarm\ Song.wav Alarm\ Song.caf -d ima4
 rm Alarm\ Song.wav Alarm\ Song\ raw.aif

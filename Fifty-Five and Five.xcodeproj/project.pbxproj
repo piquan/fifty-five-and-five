@@ -65,6 +65,8 @@
 		2D80B0D91CC30E00006E3CEF /* Fifty-Five and Five Snapshots-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fifty-Five and Five Snapshots-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D80B0DA1CC30E05006E3CEF /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		2D80B0DC1CC31454006E3CEF /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
+		2D91C4331CCDFB2A0038BDE2 /* COPYING */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		2D91C4341CCDFB2A0038BDE2 /* COPYING.notice */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING.notice; sourceTree = "<group>"; };
 		2DC4BF841CBC6E2D00E56398 /* SettingsTimerEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTimerEditController.h; sourceTree = "<group>"; };
 		2DC4BF851CBC6E2D00E56398 /* SettingsTimerEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTimerEditController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,8 @@
 				2D215B0F1CBE05100022A9E8 /* Alarm Song.README */,
 				2D75E2061CB49F4400704C3A /* Fifty-Five and Five */,
 				2D80B0DC1CC31454006E3CEF /* Snapfile */,
+				2D91C4331CCDFB2A0038BDE2 /* COPYING */,
+				2D91C4341CCDFB2A0038BDE2 /* COPYING.notice */,
 				2D80B0C91CC30A58006E3CEF /* Fifty-Five and Five Snapshots */,
 				2D75E2051CB49F3200704C3A /* Products */,
 			);
