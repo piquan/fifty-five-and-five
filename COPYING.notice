@@ -25,3 +25,14 @@ retain that option, I have to hold copyright on all its code.  If you
 submit a pull request with a substantial amount of code, I may ask you
 to send a copyright assignment so that I can continue to grant that
 exception, and exceptions for other open-source projects if needed.
+
+The GPL only applies to the source code distributed on this site, and
+any copies or modifications somebody else makes.  If you received
+Fifty-Five and Five as I distributed through the Apple App
+Store, the GPL does not apply to that copy.  (The GPL was not attached
+to that copy as you receieved it.)  That copy is licensed under
+the usual terms for most apps on the App Store, described at
+http://www.apple.com/legal/internet-services/itunes/appstore/dev/stdeula/
+However, the source code used to build the copy distributed on the
+App Store is available under the GPL, including on GitHub at
+https://github.com/piquan/fifty-five-and-five
