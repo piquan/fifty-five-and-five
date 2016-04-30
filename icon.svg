@@ -1,4 +1,13 @@
 <!-- -*- mode: nxml; compile-command: "for s in 58 87 80 120 180 29 40 76 152 167 1024 ; do sed -e s/1024/$s/g < 55a5.svg | convert svg:- icon-$s.png && pngcrush -ow -rem tEXt -rem pHYs icon-$s.png ; done" -*- -->
+<!--
+icon.svg
+Fifty-Five and Five
+Copyright (C) 2016 Joel Ray Holveck
+
+This work (icon.svg) is licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International License. To view a copy of
+this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+-->
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024"
      viewBox="-1.1 -1.1 2.2 2.2">
   <rect x="-1" y="-1" width="2" height="2" fill="#ffffff" />
