@@ -48,25 +48,32 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[TimerManager sharedInstance] numberOfSectionsInTableView:tableView] + 1;
+    return [[TimerManager sharedInstance] numberOfSectionsInTableView:tableView] + 2;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-        return NSLocalizedString(@"Timers", nil);
-    else if (section == 1)
-        return NSLocalizedString(@"Alert Sound", nil);
-    else
-        abort();
+    switch (section) {
+        case 0: return NSLocalizedString(@"Timers", nil);
+        case 1: return NSLocalizedString(@"Alert Sound", nil);
+        case 2: return nil;
+        default: abort();
+    }
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 2)
+        return NSLocalizedString(@"Fifty-Five and Five is Copyright \u00a9 2016 Joel Ray Holveck.  It comes with ABSOLUTELY NO WARRANTY.  The source code is available as free software, so you can modify and improve it.  See http://fifty-five-and-five.piquan.org/ for full details.", nil);
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0)
-        return [[TimerManager sharedInstance] tableView:tableView numberOfRowsInSection:section];
-    else if (section == 1)
-        return 2;
-    abort();
+    switch (section) {
+        case 0: return [[TimerManager sharedInstance] tableView:tableView numberOfRowsInSection:section];
+        case 1: return 2;
+        case 2: return 0;
+        default: abort();
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
